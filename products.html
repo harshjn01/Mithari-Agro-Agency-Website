@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Products | Mithari Agro Agency – Irrigation & Pipeline Solutions</title>
+  <meta name="description" content="Browse all products at Mithari Agro Agency – Drip Irrigation, Sprinkler Systems, HDPE Pipes, CPVC Pipes, Pond Liners, Filters, Valves and more. Serving Rajasthan farmers since 2000.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ---- PRODUCT GRID ---- */
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 28px;
+      margin-top: 40px;
+    }
+
+    .prod-card {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--t-med), box-shadow var(--t-med), border-color var(--t-med);
+    }
+    .prod-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow-md);
+      border-color: #90c4f0;
+    }
+
+    .prod-img-wrap {
+      position: relative;
+      overflow: hidden;
+      height: 210px;
+    }
+    .prod-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s var(--ease);
+      display: block;
+    }
+    .prod-card:hover .prod-img-wrap img { transform: scale(1.06); }
+
+    .prod-cat-badge {
+      position: absolute; top: 12px; left: 12px;
+      background: rgba(10,31,61,0.82);
+      color: #64b8f0;
+      font-family: var(--font-head); font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 4px 12px; border-radius: 100px;
+      backdrop-filter: blur(6px);
+    }
+
+    .prod-body {
+      padding: 22px 22px 20px;
+      display: flex; flex-direction: column; flex: 1;
+    }
+    .prod-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .prod-body h3 {
+      font-family: var(--font-head); font-size: 1.1rem; font-weight: 800;
+      color: var(--text-1); margin-bottom: 8px; line-height: 1.3;
+    }
+    .prod-body p {
+      font-size: 0.88rem; color: var(--text-2); line-height: 1.68;
+      flex: 1; margin-bottom: 16px;
+    }
+    .prod-features {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px;
+    }
+    .prod-tag {
+      font-size: 0.72rem; font-weight: 600;
+      background: var(--blue-pale); color: var(--blue);
+      border-radius: var(--r-sm); padding: 3px 10px;
+      border: 1px solid #90c4f0;
+    }
+    .prod-actions {
+      display: flex; gap: 10px; flex-wrap: wrap;
+    }
+    .prod-actions .btn {
+      flex: 1; font-size: 0.83rem; padding: 10px 14px; min-width: 0; text-align: center;
+    }
+
+    /* ---- FILTER TABS ---- */
+    .cat-filter {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; margin-top: 32px;
+    }
+    .cat-btn {
+      font-family: var(--font-head); font-size: 0.82rem; font-weight: 600;
+      padding: 8px 20px; border-radius: 100px;
+      border: 1.5px solid var(--border);
+      background: #fff; color: var(--text-2);
+      cursor: pointer; transition: all var(--t-fast);
+    }
+    .cat-btn:hover, .cat-btn.active {
+      background: var(--blue); color: #fff; border-color: var(--blue);
+    }
+
+    /* ---- HERO BANNER ---- */
+    .prod-hero-stat {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--r-lg); padding: 20px 28px;
+      text-align: center; backdrop-filter: blur(8px);
+    }
+    .prod-hero-stat .num {
+      font-family: var(--font-head); font-size: 2rem; font-weight: 900;
+      color: #64e0c8; line-height: 1;
+    }
+    .prod-hero-stat .lbl {
+      font-size: 0.8rem; color: rgba(255,255,255,0.72); margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="scroll-bar" id="scrollBar"></div>
+
+  <!-- Navigation -->
+  <nav class="site-nav" id="siteNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="leaf">🌱</span>
+        <span style="font-size:1.1rem;">Mithari Agro Agency</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="products.html" class="active">Products</a>
+        <a href="solutions.html">Solutions</a>
+        <a href="planner.html">Water Planner</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="contact.html" class="btn btn-green nav-quote">Request Quote</a>
+        <button class="burger" id="burger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mob-drawer" id="mobDrawer">
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html">ℹ️ About Us</a>
+    <a href="products.html">📦 Products</a>
+    <a href="solutions.html">💧 Solutions</a>
+    <a href="planner.html">📊 Water Planner</a>
+    <a href="contact.html">📞 Contact</a>
+    <a href="contact.html" class="btn btn-green btn-full mt-4">Request Quote</a>
+  </div>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>›</span>
+        <span style="color:#fff;">Our Products</span>
+      </div>
+      <h1>Our <span style="color:#64e0c8;">Complete</span> Product Range</h1>
+      <p>Quality irrigation systems, pipes, fittings, pond liners, filters and more — everything a Rajasthan farmer needs under one roof. 25 years of trusted service.</p>
+
+      <!-- Stats Row -->
+      <div style="display:flex; flex-wrap:wrap; gap:16px; margin-top:36px;">
+        <div class="prod-hero-stat reveal">
+          <div class="num">11+</div>
+          <div class="lbl">Product Categories</div>
+        </div>
+        <div class="prod-hero-stat reveal d1">
+          <div class="num">25+</div>
+          <div class="lbl">Years of Trust</div>
+        </div>
+        <div class="prod-hero-stat reveal d2">
+          <div class="num">ISI</div>
+          <div class="lbl">Certified Products</div>
+        </div>
+        <div class="prod-hero-stat reveal d3">
+          <div class="num">25+</div>
+          <div class="lbl">Districts Served</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTER TABS -->
+  <section class="section bg-white" style="padding-bottom: 0;">
+    <div class="wrap">
+      <div class="cat-filter" id="catFilter">
+        <button class="cat-btn active" data-filter="all">🌾 All Products</button>
+        <button class="cat-btn" data-filter="irrigation">💧 Irrigation Systems</button>
+        <button class="cat-btn" data-filter="pipes">🔧 Pipes & Fittings</button>
+        <button class="cat-btn" data-filter="water">🏊 Water Storage</button>
+        <button class="cat-btn" data-filter="accessories">⚙️ Accessories</button>
+        <button class="cat-btn" data-filter="service">📋 Services</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS SECTION -->
+  <section class="section bg-white">
+    <div class="wrap">
+      <div class="prod-grid" id="prodGrid">
+
+        <!-- 1. Drip Irrigation System -->
+        <div class="prod-card reveal" data-cat="irrigation">
+          <div class="prod-img-wrap">
+            <img src="assets/prod-drip-system.png" alt="Drip Irrigation System">
+            <span class="prod-cat-badge">💧 Irrigation</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-icon">💧</div>
+            <h3>Drip Irrigation System</h3>
+            <p>Complete drip irrigation system for all crops — vegetables, fruits, sugarcane, cotton, and more. Saves up to 60% water compared to flood irrigation. Includes main line, sub-main, lateral tubes, and emitters.</p>
+            <div class="prod-features">
+              <span class="prod-tag">Water Saving 60%</span>
+              <span class="prod-tag">All Crops</span>
+              <span class="prod-tag">ISI Certified</span>
+              <span class="prod-tag">Easy Install</span>
+            </div>
+            <div class="prod-actions">
+              <a href="https://wa.me/919414592783?text=Namaste!%20Mujhe%20Drip%20Irrigation%20System%20ke%20baare%20mein%20jaankari%20chahiye.%20Price%20aur%20availability%20batayein." target="_blank" class="btn btn-green">💬 Ask on WhatsApp</a>
+              <a href="contact.html" class="btn btn-outline">Get Quote</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Drip Irrigation Fittings -->
+        <div class="prod-card reveal d1" data-cat="irrigation">
+          <div class="prod-img-wrap">
+            <img src="assets/prod-drip-fittings.png" alt="Drip Irrigation Fittings">
+            <span class="prod-cat-badge">💧 Irrigation</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-icon">🔩</div>
+            <h3>Drip Irrigation Fittings</h3>
+            <p>Full range of drip system fittings — inline drippers, take-off connectors, grommet fittings, end caps, joiners, tees, elbows and more. Compatible with all major brands of drip tubes.</p>
+            <div class="prod-features">
+              <span class="prod-tag">All Sizes</span>
+              <span class="prod-tag">Durable Plastic</span>
+              <span class="prod-tag">Leak-Proof</span>
+              <span class="prod-tag">High Pressure</span>
+            </div>
+            <div class="prod-actions">
+              <a href="https://wa.me/919414592783?text=Namaste!%20Drip%20Irrigation%20Fittings%20chahiye.%20Size%20aur%20quantity%20batane%20ke%20liye%20contact%20karein." target="_blank" class="btn btn-green">💬 Ask on WhatsApp</a>
+              <a href="contact.html" class="btn btn-outline">Get Quote</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Sprinkler Irrigation System -->
+        <div class="prod-card reveal d2" data-cat="irrigation">
+          <div class="prod-img-wrap">
+            <img src="assets/prod-sprinkler.png" alt="Sprinkler Irrigation System">
+            <span class="prod-cat-badge">💧 Irrigation</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-icon">🌧️</div>
+            <h3>Sprinkler Irrigation System</h3>
+            <p>Overhead sprinkler systems for wheat, mustard, groundnut and other field crops. Uniform water distribution over large areas. Suitable for all soil types in Rajasthan's conditions.</p>
+            <div class="prod-features">
+              <span class="prod-tag">Large Area Coverage</span>
+              <span class="prod-tag">Uniform Distribution</span>
+              <span class="prod-tag">Water Saving 40%</span>
+              <span class="prod-tag">All Soil Types</span>
+            </div>
+            <div class="prod-actions">
+              <a href="https://wa.me/919414592783?text=Namaste!%20Sprinkler%20Irrigation%20System%20ke%20baare%20mein%20jaankari%20chahiye." target="_blank" class="btn btn-green">💬 Ask on WhatsApp</a>
+              <a href="contact.html" class="btn btn-outline">Get Quote</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Rain Pipe System -->
+        <div class="prod-card reveal" data-cat="irrigation">
+          <div class="prod-img-wrap">
+            <img src="assets/prod-rain-pipe.png" alt="Rain Pipe Irrigation System">
+            <span class="prod-cat-badge">💧 Irrigation</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-icon">🌦️</div>
+            <h3>Rain Pipe System</h3>
+            <p>Affordable lay-flat perforated rain pipe for vegetables, nurseries, and low-cost irrigation. Easy to install, move and store. Ideal for kitchen gardens and seasonal crops — very popular with small farmers.</p>
+            <div class="prod-features">
+              <span class="prod-tag">Budget Friendly</span>
+              <span class="prod-tag">Easy to Move</span>
+              <span class="prod-tag">Vegetables & Nursery</span>
+              <span class="prod-tag">Lightweight</span>
+            </div>
+            <div class="prod-actions">
+              <a href="https://wa.me/919414592783?text=Namaste!%20Rain%20Pipe%20System%20ke%20baare%20mein%20jaankari%20chahiye.%20Price%20batayein." target="_blank" class="btn btn-green">💬 Ask on WhatsApp</a>
+              <a href="contact.html" class="btn btn-outline">Get Quote</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. HDPE Pipes & Fittings -->
+        <div class="prod-card reveal d1" data-cat="pipes">
+          <div class="prod-img-wrap">
+            <img src="assets/prod-hdpe-pipes.png" alt="HDPE Pipes and Fittings">
+            <span class="prod-cat-badge">🔧 Pipes</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-icon">⚫</div>
+            <h3>HDPE Pipes & Fittings</h3>
+            <p>High-density polyethylene pipes for irrigation mains, borewell conveyance, and water supply. Available in ½" to 6" diameter, multiple pressure ratings (2.5 to 10 kg/cm²). Durable for 50+ years.</p>
+            <div class="prod-features">
+              <span class="prod-tag">ISI Certified</span>
+              <span class="prod-tag">½" to 6" Sizes</span>
+              <span class="prod-tag">50+ Year Life</span>
+              <span class="prod-tag">Borewell Use</span>
+            </div>
+            <div class="prod-actions">
+              <a href="https://wa.me/919414592783?text=Namaste!%20HDPE%20Pipes%20chahiye.%20Size%20aur%20pressure%20rating%20ke%20hisab%20se%20price%20batayein." target="_blank" class="btn btn-green">💬 Ask on WhatsApp</a>
+              <a href="contact.html" class="btn btn-outline">Get Quote</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. CPVC Pipes & Fittings -->
+        <div class="prod-card reveal d2" data-cat="pipes">
+          <div class="prod-img-wrap">
+            <img src="assets/prod-cpvc-pipes.png" alt="CPVC Pipes and Fittings Prince">
+            <span class="prod-cat-badge">🔧 Pipes</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-icon">🟡</div>
+            <h3>CPVC Pipes & Fittings <span style="color:var(--blue); font-size:0.85rem;">(Prince)</span></h3>
+            <p>Prince brand CPVC pipes and fittings for hot & cold water plumbing in farmhouses, residences and processing units. Temperature resistant up to 93°C, corrosion-free, and lead-free safe.</p>
+            <div class="prod-features">
+              <span class="prod-tag">Prince Brand</span>
+              <span class="prod-tag">Hot & Cold Water</span>
+              <span class="prod-tag">Lead Free</span>
+              <span class="prod-tag">ISI Certified</span>
+            </div>
+            <div class="prod-actions">
+              <a href="https://wa.me/919414592783?text=Namaste!%20CPVC%20Pipes%20Prince%20brand%20ke%20baare%20mein%20jaankari%20chahiye." target="_blank" class="btn btn-green">💬 Ask on WhatsApp</a>
+              <a href="contact.html" class="btn btn-outline">Get Quote</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. SWR Pipes & Fittings -->
+        <div class="prod-card reveal" data-cat="pipes">
+          <div class="prod-img-wrap">
+            <img src="assets/prod-swr-pipes.png" alt="SWR Pipes and Fittings">
+            <span class="prod-cat-badge">🔧 Pipes</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-icon">🟠</div>
+            <h3>SWR Pipes & Fittings</h3>
+            <p>Soil, Waste & Rain (SWR) pipes for drainage and sewage systems in farmhouses, poultry farms and commercial properties. Lightweight, corrosion resistant, easy to install. Available in 75mm to 200mm.</p>
+            <div class="prod-features">
+              <span class="prod-tag">Drainage Use</span>
+              <span class="prod-tag">75mm to 200mm</span>
+              <span class="prod-tag">Lightweight</span>
+              <span class="prod-tag">Corrosion Free</span>
+            </div>
+            <div class="prod-actions">
+              <a href="https://wa.me/919414592783?text=Namaste!%20SWR%20Pipes%20ke%20baare%20mein%20jaankari%20chahiye.%20Size%20aur%20quantity%20batayein." target="_blank" class="btn btn-green">💬 Ask on WhatsApp</a>
+              <a href="contact.html" class="btn btn-outline">Get Quote</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Pond Tirpal / Pond Liner -->
+        <div class="prod-card reveal d1" data-cat="water">
+          <div class="prod-img-wrap">
+            <img src="assets/prod-pond-liner.png" alt="Pond Tirpal Pond Liner HDPE">
+            <span class="prod-cat-badge">🏊 Water Storage</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-icon">🌊</div>
+            <h3>Pond Tirpal / Pond Liner</h3>
+            <p>Heavy-duty HDPE geomembrane pond liner (tirpal) for farm ponds, check dams, and water harvesting structures. Zero seepage, UV resistant, 10–25 year life. Available in all sizes and thicknesses.</p>
+            <div class="prod-features">
+              <span class="prod-tag">Zero Seepage</span>
+              <span class="prod-tag">UV Resistant</span>
+              <span class="prod-tag">All Sizes</span>
+              <span class="prod-tag">10–25 Yr Life</span>
+            </div>
+            <div class="prod-actions">
+              <a href="https://wa.me/919414592783?text=Namaste!%20Pond%20Liner%20Tirpal%20chahiye.%20Pond%20size%20batayein%20to%20sahi%20size%20aur%20price%20batayenge." target="_blank" class="btn btn-green">💬 Ask on WhatsApp</a>
+              <a href="contact.html" class="btn btn-outline">Get Quote</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Filters & Filtration Systems -->
+        <div class="prod-card reveal d2" data-cat="accessories">
+          <div class="prod-img-wrap">
+            <img src="assets/prod-filters.png" alt="Irrigation Filters Filtration Systems">
+            <span class="prod-cat-badge">⚙️ Accessories</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-icon">🔍</div>
+            <h3>Filters & Filtration Systems</h3>
+            <p>Disc filters, screen filters, and sand media filters for drip and sprinkler systems. Prevent emitter clogging and protect your irrigation investment. Available for canal, borewell and tank water sources.</p>
+            <div class="prod-features">
+              <span class="prod-tag">Disc Filter</span>
+              <span class="prod-tag">Screen Filter</span>
+              <span class="prod-tag">Sand Media</span>
+              <span class="prod-tag">Clog Prevention</span>
+            </div>
+            <div class="prod-actions">
+              <a href="https://wa.me/919414592783?text=Namaste!%20Irrigation%20Filters%20ke%20baare%20mein%20jaankari%20chahiye." target="_blank" class="btn btn-green">💬 Ask on WhatsApp</a>
+              <a href="contact.html" class="btn btn-outline">Get Quote</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Valves & Accessories -->
+        <div class="prod-card reveal" data-cat="accessories">
+          <div class="prod-img-wrap">
+            <img src="assets/prod-valves.png" alt="Irrigation Valves and Accessories">
+            <span class="prod-cat-badge">⚙️ Accessories</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-icon">🔧</div>
+            <h3>Valves & Accessories</h3>
+            <p>Ball valves, gate valves, butterfly valves, air release valves, pressure gauges, pipe clamps, and all irrigation accessories. Available in PVC, brass, and stainless steel as per requirement.</p>
+            <div class="prod-features">
+              <span class="prod-tag">Ball Valves</span>
+              <span class="prod-tag">Gate Valves</span>
+              <span class="prod-tag">Pressure Gauges</span>
+              <span class="prod-tag">PVC & Brass</span>
+            </div>
+            <div class="prod-actions">
+              <a href="https://wa.me/919414592783?text=Namaste!%20Valves%20aur%20accessories%20ke%20baare%20mein%20jaankari%20chahiye." target="_blank" class="btn btn-green">💬 Ask on WhatsApp</a>
+              <a href="contact.html" class="btn btn-outline">Get Quote</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. Irrigation Consultancy & Solutions -->
+        <div class="prod-card reveal d1" data-cat="service" style="grid-column: span 1;">
+          <div class="prod-img-wrap">
+            <img src="assets/prod-consultancy.png" alt="Irrigation Consultancy and Solutions">
+            <span class="prod-cat-badge">📋 Service</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-icon">📋</div>
+            <h3>Irrigation Consultancy & Solutions</h3>
+            <p>Expert guidance from our team to design the right irrigation system for your farm size, crop type, and water source. Free on-site assessment, system layout planning, product selection, and after-installation support.</p>
+            <div class="prod-features">
+              <span class="prod-tag">Free Assessment</span>
+              <span class="prod-tag">System Design</span>
+              <span class="prod-tag">On-Site Support</span>
+              <span class="prod-tag">After-Sales Help</span>
+            </div>
+            <div class="prod-actions">
+              <a href="https://wa.me/919414592783?text=Namaste!%20Hamari%20farm%20ke%20liye%20irrigation%20system%20ka%20consultation%20chahiye.%20Kab%20aa%20sakte%20hain?" target="_blank" class="btn btn-green">💬 Book Consultation</a>
+              <a href="contact.html" class="btn btn-outline">Contact Us</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="section bg-2">
+    <div class="wrap">
+      <div style="background: linear-gradient(135deg, #040e22, #0c3a7a, #0e6b55, #1a7a4a); border-radius: var(--r-xl); padding: 56px 40px; text-align:center; position:relative; overflow:hidden;" class="reveal">
+        <div style="position:absolute; top:-10px; right:40px; font-size:7rem; opacity:0.06;">💧</div>
+        <div class="section-tag" style="justify-content:center; color:#64b8f0;">Ready to Order?</div>
+        <h2 style="font-family:var(--font-head); font-size:clamp(1.8rem,3vw,2.4rem); font-weight:800; color:#fff; margin-bottom:14px;">
+          Talk to Us Directly — <span style="color:#64e0c8;">Get the Best Price</span>
+        </h2>
+        <p style="color:rgba(255,255,255,0.75); font-size:1rem; max-width:52ch; margin:0 auto 32px;">
+          Call or WhatsApp us with your requirements. Our team will suggest the right product and give you the best available price for Rajasthan farmers.
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center;">
+          <a href="https://wa.me/919414592783?text=Namaste!%20Main%20products%20ke%20baare%20mein%20jaankari%20lena%20chahta%20hoon.%20Price%20list%20bhejein." target="_blank" class="btn btn-white btn-lg" style="color:#1a7a4a;">
+            💬 WhatsApp for Price List
+          </a>
+          <a href="tel:+919414592783" class="btn btn-ghost btn-lg">
+            📞 Call: +91 94145 92783
+          </a>
+          <a href="tel:+917425837786" class="btn btn-ghost btn-lg">
+            📞 Manager: +91 74258 37786
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">🌱 <span>Mithari Agro Agency</span></div>
+          <p>Building smarter water infrastructure for Rajasthan's agricultural future. Quality products, honest guidance, lasting results.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook" title="Facebook">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram" title="Instagram">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" aria-label="YouTube" title="YouTube">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
+            </a>
+            <a href="https://wa.me/919414592783?text=Namaste!" target="_blank" aria-label="WhatsApp" title="WhatsApp" style="background:#25d366; border-color:#25d366; color:#fff;">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="solutions.html">Solutions</a></li>
+            <li><a href="planner.html">Water Planner</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Our Products</h4>
+          <ul>
+            <li><a href="products.html">Drip Irrigation</a></li>
+            <li><a href="products.html">Sprinkler Systems</a></li>
+            <li><a href="products.html">HDPE Pipes</a></li>
+            <li><a href="products.html">Pond Liner / Tirpal</a></li>
+            <li><a href="products.html">Filters & Valves</a></li>
+            <li><a href="products.html">CPVC / SWR Pipes</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-contact">
+          <h4>Contact Us</h4>
+          <p><i data-lucide="map-pin"></i>Didwana Road, Mithari, Didwana-Kuchaman, Rajasthan – 341506</p>
+          <p style="display:flex; flex-direction:column; gap:2px;"><i data-lucide="user"></i><span><strong style="color:#fff;">Dharam Chand Jain</strong> (Founder)<br><a href="tel:+919414592783">+91 94145 92783</a></span></p>
+          <p style="display:flex; flex-direction:column; gap:2px;"><i data-lucide="user"></i><span><strong style="color:#fff;">Jagdish Kumawat</strong> (Manager)<br><a href="tel:+917425837786">+91 74258 37786</a></span></p>
+          <p><i data-lucide="mail"></i><a href="mailto:mithariagroagency@gmail.com">mithariagroagency@gmail.com</a></p>
+          <p><i data-lucide="clock"></i>Mon–Sat: 9:00 AM – 7:00 PM</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Mithari Agro Agency. All Rights Reserved. | Est. 2000 | 25 Years of Trust</span>
+        <div class="footer-links-row">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-top" id="backTop" aria-label="Back to top"><i data-lucide="arrow-up"></i></button>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/919414592783?text=Namaste!%20Main%20Mithari%20Agro%20Agency%20ke%20products%20ke%20baare%20mein%20jaankari%20lena%20chahta%20hoon.%20Please%20help%20me." target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span class="wa-tip">💬 Chat on WhatsApp</span>
+  </a>
+
+  <script src="https://cdn.jsdelivr.net/npm/lucide/dist/umd/lucide.min.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Category filter
+    const catBtns = document.querySelectorAll('.cat-btn');
+    const prodCards = document.querySelectorAll('.prod-card');
+    catBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        catBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        prodCards.forEach(card => {
+          if (filter === 'all' || card.dataset.cat === filter) {
+            card.style.display = 'flex';
+            card.style.animation = 'fadeIn 0.4s ease';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

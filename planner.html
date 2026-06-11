@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Water Planner | Mithari Agro Agency</title>
+  <meta name="description" content="Free interactive water planner tool by Mithari Agro Agency. Enter your crop type and land size to get irrigation system recommendations and water saving estimates.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* PLANNER LAYOUT */
+    .planner-wrap {
+      display: grid; gap: 36px;
+    }
+    @media (min-width: 900px) { .planner-wrap { grid-template-columns: 1fr 1fr; align-items: start; } }
+
+    /* Input Card */
+    .planner-card {
+      background: #fff; border: 1.5px solid var(--border);
+      border-radius: var(--r-xl); padding: 36px;
+      box-shadow: var(--shadow-sm);
+    }
+    .planner-card h2 {
+      font-family: var(--font-head); font-size: 1.4rem; font-weight: 800;
+      margin-bottom: 6px; color: var(--text-1);
+    }
+    .planner-card .sub { font-size: 0.88rem; color: var(--text-3); margin-bottom: 28px; }
+
+    /* Crop Type Selector */
+    .crop-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 28px;
+    }
+    .crop-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      padding: 14px 8px; border-radius: var(--r-md);
+      border: 2px solid var(--border); background: var(--bg);
+      cursor: pointer; transition: all var(--t-fast);
+      font-family: var(--font-head); font-size: 0.82rem; font-weight: 600; color: var(--text-2);
+    }
+    .crop-btn .emoji { font-size: 1.8rem; }
+    .crop-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-pale); }
+    .crop-btn.selected { border-color: var(--green); background: var(--green-pale); color: var(--green); box-shadow: 0 0 0 3px rgba(45,125,50,0.1); }
+
+    /* Slider section */
+    .slider-label {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
+    }
+    .slider-label span { font-family: var(--font-head); font-size: 0.9rem; font-weight: 600; }
+    .slider-val {
+      font-family: var(--font-head); font-size: 1.1rem; font-weight: 800;
+      color: var(--green); background: var(--green-pale); padding: 2px 12px;
+      border-radius: 100px;
+    }
+    .track-wrap {
+      position: relative; margin-bottom: 6px;
+    }
+    .track-fill {
+      position: absolute; top: 0; left: 0; height: 100%;
+      background: var(--green); border-radius: 100px; pointer-events: none;
+      transition: width 0.1s;
+    }
+    .slider-ticks {
+      display: flex; justify-content: space-between;
+      font-size: 0.72rem; color: var(--text-3); margin-top: 4px;
+    }
+
+    /* Results Card */
+    .results-card {
+      background: var(--green); border-radius: var(--r-xl); padding: 36px;
+      color: #fff; position: sticky; top: 96px;
+      box-shadow: var(--shadow-lg);
+    }
+    .results-card h2 { font-family: var(--font-head); font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; }
+    .results-card .sub { font-size: 0.83rem; color: rgba(255,255,255,0.7); margin-bottom: 24px; }
+
+    .result-tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 24px; }
+    .r-tile {
+      background: rgba(255,255,255,0.12); border-radius: var(--r-md); padding: 16px;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .r-tile-icon { font-size: 1.4rem; margin-bottom: 6px; }
+    .r-tile-label { font-size: 0.72rem; color: rgba(255,255,255,0.65); margin-bottom: 4px; }
+    .r-tile-val { font-family: var(--font-head); font-size: 1.05rem; font-weight: 800; line-height: 1.2; }
+
+    .result-detail { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+    .r-detail-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.88rem;
+    }
+    .r-detail-row:last-child { border-bottom: none; }
+    .r-key { color: rgba(255,255,255,0.65); }
+    .r-val { font-family: var(--font-head); font-weight: 700; }
+
+    /* HOW IT WORKS */
+    .step-row { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 24px; }
+    .step-num {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--green); color: #fff;
+      font-family: var(--font-head); font-size: 0.9rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .step-content h4 { font-family: var(--font-head); font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .step-content p { font-size: 0.88rem; color: var(--text-2); line-height: 1.6; }
+
+    /* Tips Section */
+    .tip-card {
+      background: #fff; border: 1.5px solid var(--border); border-radius: var(--r-lg); padding: 20px;
+      display: flex; gap: 14px; align-items: flex-start;
+      transition: border-color var(--t-fast);
+    }
+    .tip-card:hover { border-color: var(--green-mid); }
+    .tip-emoji { font-size: 1.6rem; flex-shrink: 0; }
+    .tip-card h4 { font-family: var(--font-head); font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .tip-card p { font-size: 0.85rem; color: var(--text-2); line-height: 1.55; }
+  </style>
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <div class="scroll-bar" id="scrollBar"></div>
+  <nav class="site-nav" id="siteNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><span class="leaf">🌱</span><span style="font-size:1.1rem;">Mithari Agro Agency</span></a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="products.html">Products</a>
+        <a href="solutions.html">Solutions</a>
+        <a href="planner.html">Water Planner</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="contact.html" class="btn btn-green nav-quote">Request Quote</a>
+        <button class="burger" id="burger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mob-drawer" id="mobDrawer">
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html">ℹ️ About Us</a>
+    <a href="solutions.html">💧 Solutions</a>
+    <a href="planner.html">📊 Water Planner</a>
+    <a href="contact.html">📞 Contact</a>
+    <a href="contact.html" class="btn btn-green btn-full mt-4">Request Quote</a>
+  </div>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span style="color:#fff;">Water Planner</span></div>
+      <h1>Free Smart Water<br>Planner Tool</h1>
+      <p>Enter your crop type and land size — instantly get irrigation system recommendations, water saving estimates, and pipe sizing guidance tailored for Rajasthan farms.</p>
+    </div>
+  </div>
+
+  <!-- ============ PLANNER TOOL ============ -->
+  <section class="section bg-2">
+    <div class="wrap">
+      <div class="planner-wrap">
+        <!-- INPUT CARD -->
+        <div class="planner-card reveal">
+          <h2>Your Farm Details</h2>
+          <div class="sub">Select your crop type and land size to get personalised recommendations.</div>
+
+          <!-- Step 1: Crop Type -->
+          <div class="form-group mb-6">
+            <label class="form-label">Step 1: Select Your Crop Type</label>
+            <div class="crop-grid">
+              <button class="crop-btn selected" data-crop="vegetables" onclick="selectCrop(this)">
+                <span class="emoji">🌶️</span>Vegetables
+              </button>
+              <button class="crop-btn" data-crop="horticulture" onclick="selectCrop(this)">
+                <span class="emoji">🍋</span>Horticulture
+              </button>
+              <button class="crop-btn" data-crop="field" onclick="selectCrop(this)">
+                <span class="emoji">🌾</span>Field Crops
+              </button>
+              <button class="crop-btn" data-crop="cash" onclick="selectCrop(this)">
+                <span class="emoji">🌻</span>Cash Crops
+              </button>
+            </div>
+            <!-- Hidden select for JS -->
+            <select id="cropType" style="display:none;">
+              <option value="vegetables" selected>Vegetables</option>
+              <option value="horticulture">Horticulture</option>
+              <option value="field">Field Crops</option>
+              <option value="cash">Cash Crops</option>
+            </select>
+          </div>
+
+          <!-- Step 2: Land Size -->
+          <div class="form-group mb-6">
+            <div class="slider-label">
+              <label class="form-label">Step 2: Land Size (Acres)</label>
+              <span class="slider-val"><span id="acreVal">5</span> Acres</span>
+            </div>
+            <div class="track-wrap">
+              <input type="range" id="acreRange" class="range-slider" min="1" max="50" value="5">
+              <div class="track-fill" id="trackFill" style="width:8%; height:6px; top:0; border-radius:100px; pointer-events:none;"></div>
+            </div>
+            <div class="slider-ticks">
+              <span>1 Acre</span><span>25 Acres</span><span>50 Acres</span>
+            </div>
+          </div>
+
+          <!-- Step 3: Water Source -->
+          <div class="form-group mb-6">
+            <label class="form-label">Step 3: Primary Water Source</label>
+            <select class="form-input">
+              <option>Borewell (Submersible Pump)</option>
+              <option>Canal / Nala</option>
+              <option>Farm Pond</option>
+              <option>Municipal / Tanker Supply</option>
+              <option>Open Well</option>
+            </select>
+          </div>
+
+          <!-- CTA -->
+          <div class="highlight-box">
+            <strong>💡 Tip:</strong> These estimates are based on standard Rajasthan arid-zone conditions. For exact project sizing, contact our technical team for a free site consultation.
+          </div>
+          <a href="contact.html" class="btn btn-green btn-full btn-lg mt-6">
+            <i data-lucide="send"></i> Send to Expert for Detailed Quote
+          </a>
+        </div>
+
+        <!-- RESULTS CARD -->
+        <div class="reveal d2">
+          <div class="results-card">
+            <h2>📊 Planning Recommendations</h2>
+            <div class="sub">Based on Rajasthan Regional Standards · Updated in real-time</div>
+
+            <div class="result-tiles">
+              <div class="r-tile">
+                <div class="r-tile-icon">💧</div>
+                <div class="r-tile-label">Annual Water Saved</div>
+                <div class="r-tile-val" id="resSaved">1.2M Liters</div>
+              </div>
+              <div class="r-tile">
+                <div class="r-tile-icon">🌾</div>
+                <div class="r-tile-label">System Type</div>
+                <div class="r-tile-val" id="resSysType">Inline Drip</div>
+              </div>
+              <div class="r-tile">
+                <div class="r-tile-icon">🔧</div>
+                <div class="r-tile-label">HDPE Pipe Size</div>
+                <div class="r-tile-val" id="resPipe">75mm PN6</div>
+              </div>
+              <div class="r-tile">
+                <div class="r-tile-icon">🏞️</div>
+                <div class="r-tile-label">Min Pond Capacity</div>
+                <div class="r-tile-val" id="resPond">1,25,000 L</div>
+              </div>
+            </div>
+
+            <div class="result-detail">
+              <div class="r-detail-row">
+                <span class="r-key">Recommended System</span>
+                <span class="r-val" id="resSysType2">Inline Drip</span>
+              </div>
+              <div class="r-detail-row">
+                <span class="r-key">Mainline Pipe Diameter</span>
+                <span class="r-val" id="resPipe2">75mm PN6 HDPE</span>
+              </div>
+              <div class="r-detail-row">
+                <span class="r-key">Estimated Annual Savings</span>
+                <span class="r-val" id="resSaved2">1.2M Liters</span>
+              </div>
+              <div class="r-detail-row">
+                <span class="r-key">Pond Lining Required</span>
+                <span class="r-val" id="resPond2">1,25,000 Liters</span>
+              </div>
+              <div class="r-detail-row">
+                <span class="r-key">Coverage Zone</span>
+                <span class="r-val" id="resCoverage">Arid / Semi-Arid</span>
+              </div>
+            </div>
+
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.55); line-height: 1.5; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 16px;">
+              ⚠️ Estimates are modelled for Rajasthan arid-zone conditions. Actual requirements may vary based on soil type, water quality, and field topography. Contact our team for an onsite assessment.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section bg-white">
+    <div class="wrap">
+      <div class="grid col-2 gap-lg">
+        <div class="reveal">
+          <div class="section-tag">How We Help</div>
+          <h2 class="section-title">From Planning to <span class="hl">Your Farm</span></h2>
+          <p class="section-desc">Our process is simple and farmer-friendly. You don't need to be an engineer — we guide you every step of the way.</p>
+
+          <div class="mt-10">
+            <div class="step-row">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <h4>Use the Planner Tool</h4>
+                <p>Enter your crop type, land size, and water source to get instant system recommendations.</p>
+              </div>
+            </div>
+            <div class="step-row">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <h4>Speak to Our Technical Team</h4>
+                <p>Call or WhatsApp us — our irrigation expert will review your planner results and discuss your specific field conditions.</p>
+              </div>
+            </div>
+            <div class="step-row">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <h4>Receive a Detailed Quote</h4>
+                <p>We'll prepare a full product list with quantities and pricing — no hidden charges, no confusion.</p>
+              </div>
+            </div>
+            <div class="step-row">
+              <div class="step-num">4</div>
+              <div class="step-content">
+                <h4>Delivery to Your Farm Site</h4>
+                <p>Products are dispatched from our Mithari warehouse and delivered directly to your project location.</p>
+              </div>
+            </div>
+            <div class="step-row">
+              <div class="step-num">5</div>
+              <div class="step-content">
+                <h4>After-Sales Support</h4>
+                <p>Our team remains available for installation guidance, system checks, and product replacements if ever needed.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tips Column -->
+        <div class="reveal d2">
+          <div class="section-tag">Water Saving Tips</div>
+          <h2 class="section-title">Smart Farming <span class="hl">Habits</span></h2>
+          <div class="flex flex-col gap-4 mt-8">
+            <div class="tip-card"><div class="tip-emoji">🌅</div><div><h4>Irrigate in Early Morning</h4><p>Water early morning or late evening to reduce evaporation losses by up to 30% compared to midday irrigation.</p></div></div>
+            <div class="tip-card"><div class="tip-emoji">🌱</div><div><h4>Mulch Around Crop Rows</h4><p>Organic or plastic mulch around roots retains soil moisture, cutting irrigation frequency significantly.</p></div></div>
+            <div class="tip-card"><div class="tip-emoji">💧</div><div><h4>Check Emitters Regularly</h4><p>Monthly inspection of drip emitters prevents clogging — ensuring every plant receives its designed water volume.</p></div></div>
+            <div class="tip-card"><div class="tip-emoji">📊</div><div><h4>Monitor Soil Moisture</h4><p>Use a simple soil probe or tensiometer to irrigate only when crops actually need water — not on a fixed schedule.</p></div></div>
+            <div class="tip-card"><div class="tip-emoji">🏞️</div><div><h4>Line Your Farm Pond</h4><p>A properly lined pond can save lakhs of liters every monsoon season that would otherwise seep away unused.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background: var(--green-pale);">
+    <div class="wrap text-center">
+      <div class="reveal">
+        <div class="section-tag" style="justify-content:center;">Ready to Begin?</div>
+        <h2 class="section-title">Get a <span class="hl">Free Detailed Consultation</span></h2>
+        <p class="section-desc mx-auto">Our irrigation engineer will assess your planner results and prepare a complete product recommendation with pricing — at no charge.</p>
+        <div class="flex gap-4 justify-center mt-8 flex-wrap">
+          <a href="contact.html" class="btn btn-green btn-lg">Request Free Consultation</a>
+          <a href="solutions.html" class="btn btn-outline btn-lg">Browse Solutions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">🌱 <span>MithariAgro</span></div>
+          <p>Helping Rajasthan's farmers make the most of every drop of water.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook" title="Facebook">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram" title="Instagram">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" aria-label="YouTube" title="YouTube">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
+            </a>
+            <a href="https://wa.me/919414592783?text=Namaste!%20Main%20Mithari%20Agro%20Agency%20ke%20products%20ke%20baare%20mein%20jaankari%20lena%20chahta%20hoon." target="_blank" aria-label="WhatsApp" title="WhatsApp" style="background:#25d366; border-color:#25d366; color:#fff;">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col"><h4>Pages</h4><ul>
+          <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+          <li><a href="solutions.html">Solutions</a></li><li><a href="planner.html">Planner</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul></div>
+        <div class="footer-col"><h4>Products</h4><ul>
+          <li><a href="solutions.html">Drip Systems</a></li><li><a href="solutions.html">HDPE Pipes</a></li>
+          <li><a href="solutions.html">Pond Liners</a></li><li><a href="solutions.html">Sprinklers</a></li>
+        </ul></div>
+        <div class="footer-col footer-contact"><h4>Contact</h4>
+          <p><i data-lucide="phone"></i><a href="tel:+919414592783">+91 94145 92783</a></p>
+          <p><i data-lucide="mail"></i><a href="mailto:mithariagroagency@gmail.com">mithariagroagency@gmail.com</a></p>
+          <p><i data-lucide="clock"></i>Mon–Sat: 9 AM – 7 PM</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Mithari Agro Agency. All Rights Reserved.</span>
+        <div class="footer-links-row"><a href="#">Privacy</a><a href="#">Terms</a></div>
+      </div>
+    </div>
+  </footer>
+  <button class="back-top" id="backTop"><i data-lucide="arrow-up"></i></button>
+  <script src="https://cdn.jsdelivr.net/npm/lucide/dist/umd/lucide.min.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Crop selection buttons
+    function selectCrop(el) {
+      document.querySelectorAll('.crop-btn').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+      document.getElementById('cropType').value = el.dataset.crop;
+      // Trigger planner update
+      document.getElementById('cropType').dispatchEvent(new Event('change'));
+    }
+    // Sync result tiles with detail rows
+    const orig = initPlanner;
+    document.addEventListener('DOMContentLoaded', () => {
+      const s2 = document.getElementById('resSysType2');
+      const p2 = document.getElementById('resPipe2');
+      const sv2 = document.getElementById('resSaved2');
+      const pv2 = document.getElementById('resPond2');
+      const obs = new MutationObserver(() => {
+        if(s2) s2.textContent = document.getElementById('resSysType')?.textContent;
+        if(p2) p2.textContent = document.getElementById('resPipe')?.textContent;
+        if(sv2) sv2.textContent = document.getElementById('resSaved')?.textContent;
+        if(pv2) pv2.textContent = document.getElementById('resPond')?.textContent;
+      });
+      ['resSysType','resPipe','resSaved','resPond'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) obs.observe(el, { childList: true, characterData: true, subtree: true });
+      });
+    });
+  </script>
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/919414592783?text=Namaste!%20Main%20Mithari%20Agro%20Agency%20ke%20products%20ke%20baare%20mein%20jaankari%20lena%20chahta%20hoon.%20Please%20help%20me." target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span class="wa-tip">?? Chat on WhatsApp</span>
+  </a>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Mithari Agro Agency</title>
+  <meta name="description" content="Learn about Mithari Agro Agency – founded to strengthen agricultural water infrastructure across Rajasthan with quality products and farmer-first service.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Timeline */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: ''; position: absolute;
+      left: 18px; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(180deg, var(--green), var(--green-mid));
+    }
+    @media (min-width: 700px) {
+      .timeline::before { left: 50%; transform: translateX(-1px); }
+    }
+
+    .tl-item {
+      display: flex; gap: 24px; margin-bottom: 40px;
+      position: relative;
+    }
+    @media (min-width: 700px) {
+      .tl-item:nth-child(even) { flex-direction: row-reverse; }
+      .tl-item { justify-content: flex-start; }
+    }
+
+    .tl-dot {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--green); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; z-index: 1;
+      box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px var(--green-mid);
+    }
+    .tl-dot i { width: 18px; height: 18px; }
+
+    .tl-card {
+      background: #fff; border: 1.5px solid var(--border);
+      border-radius: var(--r-lg); padding: 20px 24px;
+      flex: 1; max-width: 420px;
+      box-shadow: var(--shadow-sm);
+    }
+    .tl-year { font-family: var(--font-head); font-size: 0.78rem; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+    .tl-card h4 { font-family: var(--font-head); font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .tl-card p { font-size: 0.88rem; color: var(--text-2); line-height: 1.6; }
+
+    /* Value Cards */
+    .val-card {
+      background: #fff; border: 1.5px solid var(--border); border-radius: var(--r-xl);
+      padding: 32px; text-align: center;
+      transition: transform var(--t-med), box-shadow var(--t-med), border-color var(--t-med);
+    }
+    .val-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--green-mid); }
+    .val-card .emoji { font-size: 2.4rem; margin-bottom: 14px; }
+    .val-card h3 { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .val-card p { font-size: 0.88rem; color: var(--text-2); line-height: 1.65; }
+
+    /* Team Cards */
+    .team-card {
+      background: #fff; border: 1.5px solid var(--border); border-radius: var(--r-xl);
+      overflow: hidden; text-align: center;
+      transition: transform var(--t-med), box-shadow var(--t-med);
+    }
+    .team-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+    .team-avatar {
+      height: 180px; background: var(--green-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+    }
+    .team-info { padding: 20px; }
+    .team-info h4 { font-family: var(--font-head); font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+    .team-info .role { font-size: 0.83rem; color: var(--green); font-weight: 600; margin-bottom: 8px; }
+    .team-info p { font-size: 0.83rem; color: var(--text-2); line-height: 1.55; }
+  </style>
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <div class="scroll-bar" id="scrollBar"></div>
+
+  <nav class="site-nav" id="siteNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="leaf">🌱</span>
+        <span style="font-size:1.1rem;">Mithari Agro Agency</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="products.html">Products</a>
+        <a href="solutions.html">Solutions</a>
+        <a href="planner.html">Water Planner</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="contact.html" class="btn btn-green nav-quote">Request Quote</a>
+        <button class="burger" id="burger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mob-drawer" id="mobDrawer">
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html">ℹ️ About Us</a>
+    <a href="solutions.html">💧 Solutions</a>
+    <a href="planner.html">📊 Water Planner</a>
+    <a href="contact.html">📞 Contact</a>
+    <a href="contact.html" class="btn btn-green btn-full mt-4">Request Quote</a>
+  </div>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>›</span>
+        <span style="color:#fff;">About Us</span>
+      </div>
+      <h1>Engineering Water.<br>Empowering Agriculture.</h1>
+      <p>Founded with a mission to build reliable water infrastructure for Rajasthan's farmers — helping communities grow sustainably for generations.</p>
+    </div>
+  </div>
+
+  <!-- ============ MISSION ============ -->
+  <section class="section bg-white">
+    <div class="wrap">
+      <div class="grid col-2 gap-lg">
+        <div class="reveal">
+          <div class="section-tag">Our Mission</div>
+          <h2 class="section-title">Built For The <span class="hl">Rajasthan Farmer</span></h2>
+          <p class="section-desc">Mithari Agro Agency was founded to solve a very real problem: farmers across Rajasthan were losing thousands of liters of water every day to inefficient irrigation methods, seeping ponds, and outdated piping.</p>
+          <p class="section-desc mt-4">We set out to change that — by bringing quality water infrastructure products, honest technical guidance, and reliable after-sales service directly to farms and project sites across the region.</p>
+          <div class="highlight-box mt-8">
+            "Our goal is not simply to sell products, but to help build resilient agricultural ecosystems capable of supporting future generations of Rajasthan farmers."
+          </div>
+        </div>
+        <div class="reveal d2">
+          <img src="assets/about-bg.png" alt="Mithari Agro team working on irrigation project" style="border-radius: var(--r-xl); width:100%; height:400px; object-fit:cover; box-shadow: var(--shadow-lg);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section style="background: linear-gradient(135deg, #071e4a 0%, #0e4a80 50%, #0c7a58 100%); padding: 60px 0;">
+    <div class="wrap">
+      <div class="grid g4 stats-grid text-center">
+        <div class="stat-block reveal">
+          <div style="display:flex; justify-content:center; align-items:baseline;">
+            <span class="stat-num" style="color:#fff;" data-count="25">0</span>
+            <span class="stat-suf" style="color:rgba(255,255,255,0.7);">+</span>
+          </div>
+          <div class="stat-label" style="color:rgba(255,255,255,0.75);">Years of Trusted Service</div>
+        </div>
+        <div class="stat-block reveal d1">
+          <div style="display:flex; justify-content:center; align-items:baseline;">
+            <span class="stat-num" style="color:#fff;" data-count="12000">0</span>
+            <span class="stat-suf" style="color:rgba(255,255,255,0.7);">+</span>
+          </div>
+          <div class="stat-label" style="color:rgba(255,255,255,0.75);">Farmers Served</div>
+        </div>
+        <div class="stat-block reveal d2">
+          <div style="display:flex; justify-content:center; align-items:baseline;">
+            <span class="stat-num" style="color:#fff;" data-count="500">0</span>
+            <span class="stat-suf" style="color:rgba(255,255,255,0.7);">+</span>
+          </div>
+          <div class="stat-label" style="color:rgba(255,255,255,0.75);">Projects Completed</div>
+        </div>
+        <div class="stat-block reveal d3">
+          <div style="display:flex; justify-content:center; align-items:baseline;">
+            <span class="stat-num" style="color:#fff;" data-count="25">0</span>
+            <span class="stat-suf" style="color:rgba(255,255,255,0.7);">+</span>
+          </div>
+          <div class="stat-label" style="color:rgba(255,255,255,0.75);">Districts in Rajasthan</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OUR VALUES ============ -->
+  <section class="section bg-2">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <div class="section-tag">What We Stand For</div>
+        <h2 class="section-title">Our <span class="hl">Core Values</span></h2>
+        <p class="section-desc">Every decision we make is guided by these principles — from the products we stock to the advice we give to farmers.</p>
+      </div>
+      <div class="grid g3 mt-10">
+        <div class="val-card reveal"><div class="emoji">🌊</div><h3>Water First</h3><p>We treat water as the most precious resource in agriculture. Every product we offer helps save or manage it better.</p></div>
+        <div class="val-card reveal d1"><div class="emoji">🤝</div><h3>Honest Partnerships</h3><p>We recommend only what suits your farm and budget. Long-term trust matters more than a single sale.</p></div>
+        <div class="val-card reveal d2"><div class="emoji">🏆</div><h3>Quality Always</h3><p>We source only ISI-certified, field-tested products from manufacturers we stand behind with confidence.</p></div>
+        <div class="val-card reveal d3"><div class="emoji">🌱</div><h3>Sustainable Growth</h3><p>Helping Rajasthan's farmers grow more food while using less water — good for people and the environment.</p></div>
+        <div class="val-card reveal d4"><div class="emoji">📞</div><h3>Always Available</h3><p>Our team is reachable before, during, and after every project. Your success is our ongoing responsibility.</p></div>
+        <div class="val-card reveal d5"><div class="emoji">🗺️</div><h3>Local Knowledge</h3><p>Deep understanding of Rajasthan's soil types, climate, and water challenges informs every recommendation we make.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STORY / TIMELINE ============ -->
+  <section class="section bg-white">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <div class="section-tag">Our Journey</div>
+        <h2 class="section-title">Growing Together With <span class="hl">Rajasthan's Farmers</span></h2>
+      </div>
+      <div class="timeline mt-12">
+        <div class="tl-item reveal">
+          <div class="tl-dot"><i data-lucide="flag"></i></div>
+          <div class="tl-card">
+            <div class="tl-year">Year 2000 — Founding</div>
+            <h4>Mithari Agro Agency Established</h4>
+            <p>Founded by <strong>Dharam Chand Jain</strong> in Mithari with a clear vision — to make quality agricultural water infrastructure accessible to every farmer in Rajasthan.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal d1">
+          <div class="tl-dot"><i data-lucide="package"></i></div>
+          <div class="tl-card">
+            <div class="tl-year">Expansion Phase</div>
+            <h4>HDPE Pipeline & Pond Lining Added</h4>
+            <p>Expanded product catalog to include HDPE pipe networks and geomembrane pond lining solutions, fulfilling growing demand for water storage.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal d2">
+          <div class="tl-dot"><i data-lucide="map"></i></div>
+          <div class="tl-card">
+            <div class="tl-year">Regional Growth</div>
+            <h4>Expanded Across 15+ Districts</h4>
+            <p>Supply chains and partnerships grew to serve farmers and contractors across 15+ Rajasthan districts, including Nagaur, Jodhpur, and Sikar.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal d3">
+          <div class="tl-dot"><i data-lucide="award"></i></div>
+          <div class="tl-card">
+            <div class="tl-year">Quality Milestone</div>
+            <h4>ISI Certification & Brand Partnerships</h4>
+            <p>Partnered with leading national manufacturers carrying ISI certification, ensuring consistent product quality and regulatory compliance.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal d4">
+          <div class="tl-dot"><i data-lucide="trending-up"></i></div>
+          <div class="tl-card">
+            <div class="tl-year">Today & Beyond</div>
+            <h4>25,000+ Farmers Served Across 25+ Districts</h4>
+            <p>25 years later, Mithari Agro Agency is Rajasthan's most trusted name in agricultural water infrastructure — still led by its founding family, still farmer-first in every decision.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEAM ============ -->
+  <section class="section bg-2">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <div class="section-tag">Our People</div>
+        <h2 class="section-title">The Team Behind <span class="hl">Every Project</span></h2>
+        <p class="section-desc">Experienced professionals who understand Rajasthan's agricultural landscape and are committed to your farm's success.</p>
+      </div>
+      <div class="grid g4 mt-10">
+        <!-- Founder -->
+        <div class="team-card reveal" style="grid-column: span 2;">
+          <div class="team-avatar" style="background: linear-gradient(135deg, #deeeff, #e6f7ee); height: 200px; flex-direction:column; gap:8px;">
+            <div style="font-size:5rem;">👨‍💼</div>
+            <div style="background:#0a1f3d; color:#64b8f0; font-family:var(--font-head); font-size:0.75rem; font-weight:700; padding:4px 14px; border-radius:100px; letter-spacing:0.08em;">FOUNDER</div>
+          </div>
+          <div class="team-info" style="padding:24px;">
+            <h4 style="font-size:1.3rem;">Shri Dharam Chand Jain</h4>
+            <div class="role" style="font-size:0.95rem; color:var(--blue);">Founder &amp; Director — 25 Years of Trust</div>
+            <p style="margin-top:10px; line-height:1.7;">Shri Dharam Chand Jain founded Mithari Agro Agency in 2000 with a mission to bring quality water infrastructure to Rajasthan's farming communities. His deep understanding of agriculture and unwavering commitment to honest service has made the agency a name farmers trust across 25+ districts.</p>
+            <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;">
+              <a href="tel:+919414592783" class="btn btn-green" style="font-size:0.85rem; padding:9px 18px;">
+                <i data-lucide="phone"></i> +91 94145 92783
+              </a>
+              <a href="https://wa.me/919414592783?text=Namaste%20Dharam%20Chand%20Ji!%20Main%20Mithari%20Agro%20Agency%20ke%20baare%20mein%20jaankari%20chahta%20hoon." target="_blank" class="btn" style="background:#25d366; color:#fff; font-size:0.85rem; padding:9px 18px;">
+                💬 WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manager -->
+        <div class="team-card reveal d2" style="grid-column: span 2;">
+          <div class="team-avatar" style="background: linear-gradient(135deg, #e6f7ee, #deeeff); height: 200px; flex-direction:column; gap:8px;">
+            <div style="font-size:5rem;">👨‍💻</div>
+            <div style="background:#1a7a4a; color:#fff; font-family:var(--font-head); font-size:0.75rem; font-weight:700; padding:4px 14px; border-radius:100px; letter-spacing:0.08em;">MANAGER</div>
+          </div>
+          <div class="team-info" style="padding:24px;">
+            <h4 style="font-size:1.3rem;">Shri Jagdish Kumawat</h4>
+            <div class="role" style="font-size:0.95rem; color:var(--green);">Store Manager &amp; Customer Relations</div>
+            <p style="margin-top:10px; line-height:1.7;">Shri Jagdish Kumawat manages day-to-day operations of Mithari Agro Agency. From guiding farmers in choosing the right products to coordinating timely delivery across districts, he ensures every customer leaves satisfied. Reach him directly for quick product queries and availability checks.</p>
+            <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;">
+              <a href="tel:+917425837786" class="btn btn-green" style="font-size:0.85rem; padding:9px 18px;">
+                <i data-lucide="phone"></i> +91 74258 37786
+              </a>
+              <a href="https://wa.me/917425837786?text=Namaste%20Jagdish%20Ji!%20Main%20Mithari%20Agro%20Agency%20ke%20products%20ke%20baare%20mein%20jaankari%20chahta%20hoon." target="_blank" class="btn" style="background:#25d366; color:#fff; font-size:0.85rem; padding:9px 18px;">
+                💬 WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-white">
+    <div class="wrap text-center">
+      <div class="reveal">
+        <div class="section-tag" style="justify-content:center;">Ready to Work With Us?</div>
+        <h2 class="section-title">Let's Build Something <span class="hl">That Lasts</span></h2>
+        <p class="section-desc mx-auto">Speak with our team today to get a free consultation for your irrigation or water infrastructure project.</p>
+        <div class="flex gap-4 justify-center mt-8 flex-wrap">
+          <a href="contact.html" class="btn btn-green btn-lg">Get Free Consultation</a>
+          <a href="solutions.html" class="btn btn-outline btn-lg">View Our Solutions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">🌱 <span>Mithari Agro Agency</span></div>
+          <p>Building smarter water infrastructure for Rajasthan's agricultural future.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook" title="Facebook">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram" title="Instagram">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" aria-label="YouTube" title="YouTube">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
+            </a>
+            <a href="https://wa.me/919414592783?text=Namaste!%20Main%20Mithari%20Agro%20Agency%20ke%20products%20ke%20baare%20mein%20jaankari%20lena%20chahta%20hoon." target="_blank" aria-label="WhatsApp" title="WhatsApp" style="background:#25d366; border-color:#25d366; color:#fff;">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="solutions.html">Solutions</a></li>
+            <li><a href="planner.html">Water Planner</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="solutions.html">Drip Irrigation</a></li>
+            <li><a href="solutions.html">HDPE Pipelines</a></li>
+            <li><a href="solutions.html">Pond Liners</a></li>
+            <li><a href="solutions.html">Sprinklers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-contact">
+          <h4>Contact</h4>
+          <p><i data-lucide="map-pin"></i>Didwana Road, Mithari, Rajasthan</p>
+          <p style="display:flex; flex-direction:column; gap:2px;"><i data-lucide="user"></i><span><strong style="color:#fff;">Dharam Chand Jain</strong> (Founder)<br><a href="tel:+919414592783">+91 94145 92783</a></span></p>
+          <p style="display:flex; flex-direction:column; gap:2px;"><i data-lucide="user"></i><span><strong style="color:#fff;">Jagdish Kumawat</strong> (Manager)<br><a href="tel:+917425837786">+91 74258 37786</a></span></p>
+          <p><i data-lucide="mail"></i><a href="mailto:mithariagroagency@gmail.com">mithariagroagency@gmail.com</a></p>
+          <p><i data-lucide="clock"></i>Mon–Sat: 9 AM – 7 PM</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Mithari Agro Agency. All Rights Reserved.</span>
+        <div class="footer-links-row">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-top" id="backTop"><i data-lucide="arrow-up"></i></button>
+  <script src="https://cdn.jsdelivr.net/npm/lucide/dist/umd/lucide.min.js"></script>
+  <script src="app.js"></script>
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/919414592783?text=Namaste!%20Main%20Mithari%20Agro%20Agency%20ke%20products%20ke%20baare%20mein%20jaankari%20lena%20chahta%20hoon.%20Please%20help%20me." target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span class="wa-tip">?? Chat on WhatsApp</span>
+  </a>
+</body>
+</html>
