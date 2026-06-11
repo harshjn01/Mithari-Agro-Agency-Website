@@ -15,7 +15,7 @@
 
     /* Input Card */
     .planner-card {
-      background: #fff; border: 1.5px solid var(--border);
+      background: var(--bg-3); border: 1.5px solid var(--border);
       border-radius: var(--r-xl); padding: 36px;
       box-shadow: var(--shadow-sm);
     }
@@ -32,13 +32,81 @@
     .crop-btn {
       display: flex; flex-direction: column; align-items: center; gap: 6px;
       padding: 14px 8px; border-radius: var(--r-md);
-      border: 2px solid var(--border); background: var(--bg);
+      border: 2.5px solid var(--border); background: var(--bg);
       cursor: pointer; transition: all var(--t-fast);
-      font-family: var(--font-head); font-size: 0.82rem; font-weight: 600; color: var(--text-2);
+      font-family: var(--font-head); font-size: 0.85rem; font-weight: 700; color: var(--text-2);
     }
     .crop-btn .emoji { font-size: 1.8rem; }
     .crop-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-pale); }
     .crop-btn.selected { border-color: var(--green); background: var(--green-pale); color: var(--green); box-shadow: 0 0 0 3px rgba(45,125,50,0.1); }
+
+    /* Toggle Unit Button Styles */
+    .unit-toggle-container {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+      background: var(--bg-2);
+      padding: 4px;
+      border-radius: var(--r-lg);
+      border: 1.5px solid var(--border);
+    }
+    .unit-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--text-2);
+      font-family: var(--font-head);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: var(--r-md);
+      cursor: pointer;
+      transition: all var(--t-fast);
+      text-align: center;
+    }
+    .unit-btn:hover {
+      color: var(--green);
+    }
+    .unit-btn.active {
+      background: var(--green);
+      color: #fff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Range slider inputs sync */
+    .input-sync-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    .num-input-wrap {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      background: var(--bg-3);
+      box-shadow: var(--shadow-sm);
+    }
+    .num-input {
+      width: 70px;
+      border: none;
+      padding: 10px 6px;
+      text-align: center;
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--green);
+      outline: none;
+    }
+    .num-input-unit {
+      padding-right: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-3);
+      background: var(--bg-3);
+    }
 
     /* Slider section */
     .slider-label {
@@ -46,12 +114,13 @@
     }
     .slider-label span { font-family: var(--font-head); font-size: 0.9rem; font-weight: 600; }
     .slider-val {
-      font-family: var(--font-head); font-size: 1.1rem; font-weight: 800;
-      color: var(--green); background: var(--green-pale); padding: 2px 12px;
+      font-family: var(--font-head); font-size: 1rem; font-weight: 800;
+      color: var(--green); background: var(--green-pale); padding: 4px 14px;
       border-radius: 100px;
     }
     .track-wrap {
       position: relative; margin-bottom: 6px;
+      flex: 1;
     }
     .track-fill {
       position: absolute; top: 0; left: 0; height: 100%;
@@ -91,6 +160,29 @@
     .r-key { color: rgba(255,255,255,0.65); }
     .r-val { font-family: var(--font-head); font-weight: 700; }
 
+    /* WhatsApp button in results card */
+    .btn-wa-share {
+      background: #25d366;
+      color: #fff !important;
+      border: 1.5px solid #25d366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 18px;
+      box-shadow: 0 4px 12px rgba(37,211,102,0.3);
+      cursor: pointer;
+      font-family: var(--font-head);
+      font-weight: 800;
+      width: 100%;
+    }
+    .btn-wa-share:hover {
+      background: #1ebd59;
+      border-color: #1ebd59;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(37,211,102,0.4);
+    }
+
     /* HOW IT WORKS */
     .step-row { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 24px; }
     .step-num {
@@ -104,7 +196,7 @@
 
     /* Tips Section */
     .tip-card {
-      background: #fff; border: 1.5px solid var(--border); border-radius: var(--r-lg); padding: 20px;
+      background: var(--bg-3); border: 1.5px solid var(--border); border-radius: var(--r-lg); padding: 20px;
       display: flex; gap: 14px; align-items: flex-start;
       transition: border-color var(--t-fast);
     }
@@ -122,7 +214,7 @@
   <div class="scroll-bar" id="scrollBar"></div>
   <nav class="site-nav" id="siteNav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo"><span class="leaf">🌱</span><span style="font-size:1.1rem;">Mithari Agro Agency</span></a>
+      <a href="index.html" class="nav-logo"><span style="font-size:1.1rem;">Mithari Agro Agency</span></a>
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="about.html">About Us</a>
@@ -162,24 +254,32 @@
       <div class="planner-wrap">
         <!-- INPUT CARD -->
         <div class="planner-card reveal">
-          <h2>Your Farm Details</h2>
-          <div class="sub">Select your crop type and land size to get personalised recommendations.</div>
+          <h2>Your Farm Details / फार्म का विवरण</h2>
+          <div class="sub">Select your crop type and land size to get recommendations in simple terms. / ड्रिप और फव्वारा सिस्टम के लिए अपनी जानकारी भरें।</div>
 
           <!-- Step 1: Crop Type -->
           <div class="form-group mb-6">
-            <label class="form-label">Step 1: Select Your Crop Type</label>
+            <label class="form-label" style="font-weight:700;">Step 1: Select Crop / फसल चुनें</label>
             <div class="crop-grid">
               <button class="crop-btn selected" data-crop="vegetables" onclick="selectCrop(this)">
-                <span class="emoji">🌶️</span>Vegetables
+                <span class="emoji">🌶️</span>
+                <span style="font-size:0.9rem; margin-top:2px;">Vegetables / सब्जियां</span>
+                <span style="font-size:0.7rem; color:var(--text-3); font-weight:normal;">(मिर्च, टमाटर, प्याज)</span>
               </button>
               <button class="crop-btn" data-crop="horticulture" onclick="selectCrop(this)">
-                <span class="emoji">🍋</span>Horticulture
+                <span class="emoji">🍊</span>
+                <span style="font-size:0.9rem; margin-top:2px;">Orchards / बागवानी</span>
+                <span style="font-size:0.7rem; color:var(--text-3); font-weight:normal;">(नींबू, अनार, बेर)</span>
               </button>
               <button class="crop-btn" data-crop="field" onclick="selectCrop(this)">
-                <span class="emoji">🌾</span>Field Crops
+                <span class="emoji">🌾</span>
+                <span style="font-size:0.9rem; margin-top:2px;">Field Crops / अनाज</span>
+                <span style="font-size:0.7rem; color:var(--text-3); font-weight:normal;">(गेहूँ, बाजरा, सरसों)</span>
               </button>
               <button class="crop-btn" data-crop="cash" onclick="selectCrop(this)">
-                <span class="emoji">🌻</span>Cash Crops
+                <span class="emoji">🌻</span>
+                <span style="font-size:0.9rem; margin-top:2px;">Cash Crops / नकदी</span>
+                <span style="font-size:0.7rem; color:var(--text-3); font-weight:normal;">(मूँगफली, कपास, ग्वार)</span>
               </button>
             </div>
             <!-- Hidden select for JS -->
@@ -191,97 +291,140 @@
             </select>
           </div>
 
-          <!-- Step 2: Land Size -->
+          <!-- Step 2: Land Size (Acres / Bighas) -->
           <div class="form-group mb-6">
+            <label class="form-label" style="font-weight:700; margin-bottom: 8px; display:block;">Step 2: Choose Unit & Size / पैमाना और आकार</label>
+            
+            <!-- Unit Toggle Container -->
+            <div class="unit-toggle-container">
+              <button type="button" class="unit-btn active" id="unitAcre" onclick="setUnit('acre')">Acre (एकड़)</button>
+              <button type="button" class="unit-btn" id="unitBigha" onclick="setUnit('bigha')">Bigha (बीघा)</button>
+            </div>
+
             <div class="slider-label">
-              <label class="form-label">Step 2: Land Size (Acres)</label>
-              <span class="slider-val"><span id="acreVal">5</span> Acres</span>
+              <span style="color:var(--text-2); font-size:0.85rem;">Adjust slider or enter number:</span>
+              <span class="slider-val" id="combinedUnitVal">5 Acres (12.5 Bigha)</span>
             </div>
-            <div class="track-wrap">
-              <input type="range" id="acreRange" class="range-slider" min="1" max="50" value="5">
-              <div class="track-fill" id="trackFill" style="width:8%; height:6px; top:0; border-radius:100px; pointer-events:none;"></div>
+
+            <div class="input-sync-row">
+              <div class="track-wrap">
+                <input type="range" id="acreRange" class="range-slider" min="1" max="50" value="5" oninput="syncInputs('slider')">
+                <div class="track-fill" id="trackFill" style="width:8%; height:6px; top:0; border-radius:100px; pointer-events:none;"></div>
+              </div>
+              
+              <div class="num-input-wrap">
+                <input type="number" id="acreNum" class="num-input" min="1" max="150" value="5" oninput="syncInputs('number')">
+                <span class="num-input-unit" id="inputUnitLabel">Acres</span>
+              </div>
             </div>
-            <div class="slider-ticks">
+            
+            <div class="slider-ticks" id="sliderTicks">
               <span>1 Acre</span><span>25 Acres</span><span>50 Acres</span>
             </div>
           </div>
 
           <!-- Step 3: Water Source -->
           <div class="form-group mb-6">
-            <label class="form-label">Step 3: Primary Water Source</label>
-            <select class="form-input">
-              <option>Borewell (Submersible Pump)</option>
-              <option>Canal / Nala</option>
-              <option>Farm Pond</option>
-              <option>Municipal / Tanker Supply</option>
-              <option>Open Well</option>
+            <label class="form-label" style="font-weight:700;">Step 3: Water Source / पानी का साधन</label>
+            <select id="waterSource" class="form-input" onchange="updatePlanner()">
+              <option value="Borewell / नलकूप (कुआँ)">Borewell / नलकूप (कुआँ)</option>
+              <option value="Canal / नहर (खाल)">Canal / नहर (खाल)</option>
+              <option value="Khet Talai / खेत तलाई (Pond)">Khet Talai / खेत तलाई (Pond)</option>
+              <option value="Municipal / Tanker Supply (टैंकर)">Municipal / Tanker Supply (टैंकर)</option>
+              <option value="Open Well / खुला कुआँ">Open Well / खुला कुआँ</option>
+            </select>
+          </div>
+
+          <!-- Step 4: Farmer Category (for Subsidy Estimator) -->
+          <div class="form-group mb-6">
+            <label class="form-label" style="font-weight:700;">Step 4: Farmer Category / किसान श्रेणी (सब्सिडी हेतु)</label>
+            <select id="farmerCategory" class="form-input" onchange="updatePlanner()">
+              <option value="small">Small, Marginal or Woman Farmer / लघु, सीमांत या महिला किसान (70% Subsidy)</option>
+              <option value="general">Other / सामान्य या अन्य किसान (50% Subsidy)</option>
             </select>
           </div>
 
           <!-- CTA -->
-          <div class="highlight-box">
-            <strong>💡 Tip:</strong> These estimates are based on standard Rajasthan arid-zone conditions. For exact project sizing, contact our technical team for a free site consultation.
+          <div class="highlight-box" style="font-size:0.83rem; line-height:1.5; color:var(--text-2);">
+            <strong>💡 राजस्थान खेत गाइड:</strong> यह अनुमान राजस्थान के रेतीले और शुष्क क्षेत्र की परिस्थितियों पर आधारित है। अपनी भूमि की सटीक जरूरत जानने के लिए संपर्क करें।
           </div>
-          <a href="contact.html" class="btn btn-green btn-full btn-lg mt-6">
-            <i data-lucide="send"></i> Send to Expert for Detailed Quote
+          <a href="contact.html" class="btn btn-outline btn-full btn-lg mt-4">
+            ✉️ Get Custom Design Quote (फ्री डिज़ाइन और कोट)
           </a>
         </div>
 
         <!-- RESULTS CARD -->
         <div class="reveal d2">
           <div class="results-card">
-            <h2>📊 Planning Recommendations</h2>
-            <div class="sub">Based on Rajasthan Regional Standards · Updated in real-time</div>
+            <h2>📊 Recommendations / सुझाई गई सलाह</h2>
+            <div class="sub">Tailored for Rajasthan Dry Regions · वास्तविक समय गणना</div>
 
             <div class="result-tiles">
               <div class="r-tile">
                 <div class="r-tile-icon">💧</div>
-                <div class="r-tile-label">Annual Water Saved</div>
-                <div class="r-tile-val" id="resSaved">1.2M Liters</div>
+                <div class="r-tile-label">Annual Water Saved (बचत)</div>
+                <div class="r-tile-val" id="resSaved">15 Lakh Liters</div>
               </div>
               <div class="r-tile">
                 <div class="r-tile-icon">🌾</div>
-                <div class="r-tile-label">System Type</div>
+                <div class="r-tile-label">System Recommended</div>
                 <div class="r-tile-val" id="resSysType">Inline Drip</div>
               </div>
               <div class="r-tile">
                 <div class="r-tile-icon">🔧</div>
-                <div class="r-tile-label">HDPE Pipe Size</div>
-                <div class="r-tile-val" id="resPipe">75mm PN6</div>
+                <div class="r-tile-label">HDPE Pipes (अनुमानित)</div>
+                <div class="r-tile-val" id="resPipe">125 Pipes</div>
               </div>
               <div class="r-tile">
                 <div class="r-tile-icon">🏞️</div>
-                <div class="r-tile-label">Min Pond Capacity</div>
+                <div class="r-tile-label">Pond Capacity (खेत तलाई)</div>
                 <div class="r-tile-val" id="resPond">1,25,000 L</div>
               </div>
             </div>
 
             <div class="result-detail">
               <div class="r-detail-row">
-                <span class="r-key">Recommended System</span>
+                <span class="r-key">Recommended System / सुझाई गई प्रणाली</span>
                 <span class="r-val" id="resSysType2">Inline Drip</span>
               </div>
               <div class="r-detail-row">
-                <span class="r-key">Mainline Pipe Diameter</span>
+                <span class="r-key">Mainline Pipe Size / मुख्य पाइप व्यास</span>
                 <span class="r-val" id="resPipe2">75mm PN6 HDPE</span>
               </div>
               <div class="r-detail-row">
-                <span class="r-key">Estimated Annual Savings</span>
-                <span class="r-val" id="resSaved2">1.2M Liters</span>
+                <span class="r-key">Drippers/Nozzles Needed / जरूरी ड्रिपर/नोजल</span>
+                <span class="r-val" id="resEmittersCount">approx. 2,200 emitters</span>
               </div>
               <div class="r-detail-row">
-                <span class="r-key">Pond Lining Required</span>
+                <span class="r-key">Pond Lining Required / तलाई तिरपाल कैपेसिटी</span>
                 <span class="r-val" id="resPond2">1,25,000 Liters</span>
               </div>
               <div class="r-detail-row">
-                <span class="r-key">Coverage Zone</span>
-                <span class="r-val" id="resCoverage">Arid / Semi-Arid</span>
+                <span class="r-key">Estimated Savings / सालाना पानी की बचत</span>
+                <span class="r-val" id="resSaved2">15 Lakh Liters</span>
+              </div>
+              <div class="r-detail-row">
+                <span class="r-key">Suitable Crops / उपयोगी फसलें</span>
+                <span class="r-val" id="resZone">Vegetables</span>
+              </div>
+              <div class="r-detail-row" style="border-top:1.5px dashed var(--border); padding-top:12px; margin-top:12px;">
+                <span class="r-key" style="font-weight:700;">Est. Total System Cost / अनुमानित कुल लागत</span>
+                <span class="r-val" id="resTotalCost" style="font-weight:700;">₹2,25,000</span>
+              </div>
+              <div class="r-detail-row" style="background:var(--green-pale); padding:6px 10px; border-radius:var(--r-sm); border-left:3px solid var(--green);">
+                <span class="r-key" style="color:var(--green); font-weight:700;">Estimated Govt. Subsidy / सरकारी अनुदान (अनुमानित)</span>
+                <span class="r-val" id="resSubsidy" style="color:var(--green); font-weight:700;">-₹1,57,500 (70%)</span>
+              </div>
+              <div class="r-detail-row">
+                <span class="r-key" style="font-weight:700; color:var(--text-1);">Farmer Share / आपका अनुमानित शुद्ध खर्च</span>
+                <span class="r-val" id="resFarmerCost" style="font-weight:700; color:var(--text-1); font-size:1.1rem;">₹67,500</span>
               </div>
             </div>
 
-            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.55); line-height: 1.5; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 16px;">
-              ⚠️ Estimates are modelled for Rajasthan arid-zone conditions. Actual requirements may vary based on soil type, water quality, and field topography. Contact our team for an onsite assessment.
-            </div>
+            <button onclick="shareToWhatsApp()" class="btn btn-wa-share btn-lg">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display:inline-block; vertical-align:middle; margin-right:6px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Share on WhatsApp / व्हाट्सएप पर भेजें
+            </button>
           </div>
         </div>
       </div>
@@ -352,6 +495,71 @@
     </div>
   </section>
 
+  <!-- ============ SUBSIDY GUIDE SECTION ============ -->
+  <section class="section bg-white" id="subsidy">
+    <div class="wrap">
+      <div class="grid col-2 gap-lg">
+        <div class="reveal">
+          <div class="section-tag">Rajasthan Govt. Subsidy / कृषि अनुदान</div>
+          <h2 class="section-title">Get Up To <span class="hl">70-75% Govt. Subsidy</span> / सरकारी योजनाएं</h2>
+          <p class="section-desc">The Rajasthan Department of Agriculture provides financial support for drip irrigation, sprinklers, and farm ponds (Khet Talai) to promote water conservation. Mithari Agro Agency is an authorized partner helping you clear all documentation easily.</p>
+          
+          <div style="background:var(--bg-3); border:1.5px solid var(--border); border-radius:var(--r-xl); padding:24px; margin-top:24px;">
+            <h4 style="font-family:var(--font-head); font-weight:700; margin-bottom:12px; color:var(--text-1); display:flex; align-items:center; gap:8px;">
+              📋 Documents Needed / आवश्यक दस्तावेज:
+            </h4>
+            <ul style="font-size:0.88rem; line-height:1.7; color:var(--text-2); padding-left:20px; display:flex; flex-direction:column; gap:8px;">
+              <li><strong>Jamabandi Copy (नकल जमाबंदी):</strong> Land ownership record (not older than 6 months). / 6 महीने से अधिक पुरानी न हो।</li>
+              <li><strong>Naksha Trace (नक्शा ट्रेस):</strong> Land map certified by Patwari. / हल्का पटवारी द्वारा प्रमाणित नक्शा।</li>
+              <li><strong>Jan Aadhaar / Aadhaar (जन आधार / आधार):</strong> Linked with active mobile number for OTP. / जन आधार कार्ड व आधार कार्ड।</li>
+              <li><strong>Soil & Water Report (मिट्टी-पानी जांच):</strong> Certified lab testing report. / प्राधिकृत प्रयोगशाला की रिपोर्ट।</li>
+              <li><strong>Electricity Bill / Certificate (बिजली का बिल):</strong> Pump details or well registry. / कुएं या विद्युत कनेक्शन विवरण।</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="reveal d2">
+          <div style="background:#fff; border:1.5px solid var(--border); border-radius:var(--r-xl); padding:32px; height:100%; display:flex; flex-direction:column; gap:20px; justify-content:center; box-shadow:var(--shadow-sm);">
+            <div style="text-align:center; margin-bottom:10px;">
+              <span style="font-size:3rem;">🌾</span>
+              <h3 style="font-family:var(--font-head); font-size:1.3rem; font-weight:800; margin-top:10px;">Who is Eligible? / पात्रता की शर्तें</h3>
+            </div>
+            
+            <div style="display:grid; gap:16px;">
+              <div style="display:flex; gap:12px; align-items:flex-start;">
+                <div style="background:var(--green-pale); color:var(--green); width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">1</div>
+                <div>
+                  <h5 style="font-weight:700; font-size:0.92rem; margin-bottom:2px;">Minimum Land / न्यूनतम भूमि</h5>
+                  <p style="font-size:0.83rem; color:var(--text-2); line-height:1.4;">At least 0.2 hectares of irrigated land is required for subsidy application. / आवेदन के लिए कम से कम 0.2 हेक्टेयर भूमि अनिवार्य।</p>
+                </div>
+              </div>
+
+              <div style="display:flex; gap:12px; align-items:flex-start;">
+                <div style="background:var(--green-pale); color:var(--green); width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">2</div>
+                <div>
+                  <h5 style="font-weight:700; font-size:0.92rem; margin-bottom:2px;">Small/Marginal/Women / विशेष प्राथमिकता</h5>
+                  <p style="font-size:0.83rem; color:var(--text-2); line-height:1.4;">Small, marginal, and women farmers receive higher subsidy rates (70% to 75%). / लघु, सीमांत व महिला किसानों को विशेष वरीयता।</p>
+                </div>
+              </div>
+
+              <div style="display:flex; gap:12px; align-items:flex-start;">
+                <div style="background:var(--green-pale); color:var(--green); width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">3</div>
+                <div>
+                  <h5 style="font-weight:700; font-size:0.92rem; margin-bottom:2px;">Khet Talai (Farm Pond) / खेत तलाई योजना</h5>
+                  <p style="font-size:0.83rem; color:var(--text-2); line-height:1.4;">Subsidies for lined ponds up to Rs. 90,000 to prevent seepage of rainwater. / प्लास्टिक शीट तलाई पर अधिकतम ₹90,000 तक सब्सिडी।</p>
+                </div>
+              </div>
+            </div>
+
+            <a href="https://wa.me/919414592783?text=Namaste!%20Mujhe%20Rajasthan%20Government%20Subsidy%20(कृषि%20अनुदान)%20yojana%20aur%20drip%20irrigation%20par%20jaankari%20chahiye." target="_blank" class="btn btn-green btn-full" style="margin-top:10px;">
+              💬 Ask About Subsidy on WhatsApp / योजना की जानकारी लें
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="section" style="background: var(--green-pale);">
     <div class="wrap text-center">
@@ -371,7 +579,7 @@
     <div class="wrap">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="footer-logo">🌱 <span>MithariAgro</span></div>
+          <div class="footer-logo"><span>MithariAgro</span></div>
           <p>Helping Rajasthan's farmers make the most of every drop of water.</p>
           <div class="footer-social">
             <a href="#" aria-label="Facebook" title="Facebook">
@@ -413,39 +621,246 @@
   <script src="https://cdn.jsdelivr.net/npm/lucide/dist/umd/lucide.min.js"></script>
   <script src="app.js"></script>
   <script>
+    let currentUnit = 'acre'; // 'acre' or 'bigha'
+
     // Crop selection buttons
     function selectCrop(el) {
       document.querySelectorAll('.crop-btn').forEach(b => b.classList.remove('selected'));
       el.classList.add('selected');
       document.getElementById('cropType').value = el.dataset.crop;
-      // Trigger planner update
-      document.getElementById('cropType').dispatchEvent(new Event('change'));
+      updatePlanner();
     }
-    // Sync result tiles with detail rows
-    const orig = initPlanner;
-    document.addEventListener('DOMContentLoaded', () => {
-      const s2 = document.getElementById('resSysType2');
-      const p2 = document.getElementById('resPipe2');
-      const sv2 = document.getElementById('resSaved2');
-      const pv2 = document.getElementById('resPond2');
-      const obs = new MutationObserver(() => {
-        if(s2) s2.textContent = document.getElementById('resSysType')?.textContent;
-        if(p2) p2.textContent = document.getElementById('resPipe')?.textContent;
-        if(sv2) sv2.textContent = document.getElementById('resSaved')?.textContent;
-        if(pv2) pv2.textContent = document.getElementById('resPond')?.textContent;
-      });
-      ['resSysType','resPipe','resSaved','resPond'].forEach(id => {
-        const el = document.getElementById(id);
-        if(el) obs.observe(el, { childList: true, characterData: true, subtree: true });
-      });
-    });
+
+    // Unit toggle selection
+    function setUnit(unit) {
+      currentUnit = unit;
+      document.querySelectorAll('.unit-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('unit' + unit.charAt(0).toUpperCase() + unit.slice(1)).classList.add('active');
+      
+      const slider = document.getElementById('acreRange');
+      const numInput = document.getElementById('acreNum');
+      const unitLabel = document.getElementById('inputUnitLabel');
+      const ticks = document.getElementById('sliderTicks');
+      
+      const prevVal = parseFloat(numInput.value) || 5;
+      
+      if (unit === 'bigha') {
+        unitLabel.textContent = 'बीघा';
+        slider.min = 1;
+        slider.max = 120;
+        // Convert Acre to Bigha (1 Acre = 2.5 Bigha)
+        const newVal = Math.min(120, Math.round(prevVal * 2.5));
+        slider.value = newVal;
+        numInput.value = newVal;
+        
+        ticks.innerHTML = '<span>1 बीघा</span><span>60 बीघा</span><span>120 बीघा</span>';
+      } else {
+        unitLabel.textContent = 'Acres';
+        slider.min = 1;
+        slider.max = 50;
+        // Convert Bigha to Acre (1 Bigha = 0.4 Acre)
+        const newVal = Math.max(1, Math.round(prevVal / 2.5));
+        slider.value = newVal;
+        numInput.value = newVal;
+        
+        ticks.innerHTML = '<span>1 Acre</span><span>25 Acres</span><span>50 Acres</span>';
+      }
+      
+      updatePlanner();
+    }
+
+    // Sync input range slider and number input box
+    function syncInputs(source) {
+      const slider = document.getElementById('acreRange');
+      const numInput = document.getElementById('acreNum');
+      
+      if (source === 'slider') {
+        numInput.value = slider.value;
+      } else {
+        let val = parseInt(numInput.value, 10);
+        if (isNaN(val) || val < 1) val = 1;
+        const maxVal = currentUnit === 'bigha' ? 120 : 50;
+        if (val > maxVal) val = maxVal;
+        numInput.value = val;
+        slider.value = val;
+      }
+      updatePlanner();
+    }
+
+    // Planner update calculation logic
+    function updatePlanner() {
+      const cropSelect = document.getElementById('cropType');
+      const numInput = document.getElementById('acreNum');
+      const slider = document.getElementById('acreRange');
+      const fill = document.getElementById('trackFill');
+      const combinedUnitVal = document.getElementById('combinedUnitVal');
+
+      if (!cropSelect || !numInput || !slider) return;
+
+      const cropVal = cropSelect.value;
+      const sizeVal = parseFloat(numInput.value) || 1;
+
+      // Update slider track fill
+      const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+      if (fill) fill.style.width = `${pct}%`;
+
+      // Update top indicator with conversion helper
+      let acres = sizeVal;
+      let bighas = sizeVal * 2.5;
+      if (currentUnit === 'bigha') {
+        bighas = sizeVal;
+        acres = sizeVal / 2.5;
+        combinedUnitVal.textContent = `${sizeVal} Bigha (approx. ${acres.toFixed(1)} Acre)`;
+      } else {
+        combinedUnitVal.textContent = `${sizeVal} Acre (approx. ${bighas.toFixed(1)} Bigha)`;
+      }
+
+      // Calculations database based on standard local Rajasthan configurations
+      const data = {
+        vegetables: {
+          system: 'Inline Drip System (सब्जी ड्रिप)',
+          pipeSize: '75mm PN6 HDPE Pipes',
+          pipeRatio: 25, // 25 pipes of 6m per acre
+          emitterRatio: 2200, // 2200 drippers per acre
+          waterSaveRatio: 300000, // 3 Lakh Liters per acre
+          pondRatio: 45000,
+          notes: 'Chilli, Tomato, Onion, etc.'
+        },
+        horticulture: {
+          system: 'Online Drip System (बागवानी ड्रिप)',
+          pipeSize: '63mm PN6 HDPE Pipes',
+          pipeRatio: 20,
+          emitterRatio: 400, // 400 emitters per acre (100 trees)
+          waterSaveRatio: 400000, // 4 Lakh Liters per acre
+          pondRatio: 50000,
+          notes: 'Pomegranate, Lemon, Ber, Citrus'
+        },
+        field: {
+          system: 'Sprinkler System (फव्वारा सिंचाई)',
+          pipeSize: '90mm PN4 HDPE Pipes',
+          pipeRatio: 30, // 30 quick-coupling pipes per acre
+          emitterRatio: 8, // 8 nozzles per acre
+          waterSaveRatio: 200000, // 2 Lakh Liters per acre
+          pondRatio: 30000,
+          notes: 'Wheat, Mustard, Bajra, etc.'
+        },
+        cash: {
+          system: 'Rain Pipe / Micro Drip (रेन पाइप)',
+          pipeSize: '75mm PN6 HDPE Pipes',
+          pipeRatio: 25,
+          emitterRatio: 1200,
+          waterSaveRatio: 320000,
+          pondRatio: 40000,
+          notes: 'Groundnut, Cotton, Guar'
+        }
+      };
+
+      const d = data[cropVal] || data.vegetables;
+
+      // Sizing outputs
+      const totalPipes = Math.round(d.pipeRatio * acres);
+      const totalEmitters = Math.round(d.emitterRatio * acres);
+      const totalSaved = Math.round(d.waterSaveRatio * acres);
+      const totalPondCapacity = Math.round(d.pondRatio * acres);
+
+      // Sizing descriptions for pipes and emitters
+      const pipeDesc = `approx. ${totalPipes} pipes (${d.pipeSize}, 20ft length)`;
+      let emitterUnit = cropVal === 'field' ? 'nozzles (नोजल)' : 'emitters (ड्रिपर)';
+      const emitterDesc = `approx. ${totalEmitters.toLocaleString()} ${emitterUnit}`;
+
+      // Water saved formatted in Lakh Liters (traditional Indian system)
+      let savedText = '';
+      if (totalSaved >= 100000) {
+        savedText = `${(totalSaved / 100000).toFixed(1)} Lakh Liters (${totalSaved.toLocaleString()} L)`;
+      } else {
+        savedText = `${(totalSaved / 1000).toFixed(0)}K Liters (${totalSaved.toLocaleString()} L)`;
+      }
+
+      // Pond size recommendation description
+      let pondDesc = '';
+      if (totalPondCapacity < 50000) {
+        pondDesc = `${totalPondCapacity.toLocaleString()} L (approx. 25ft x 25ft Pond)`;
+      } else if (totalPondCapacity < 100000) {
+        pondDesc = `${totalPondCapacity.toLocaleString()} L (approx. 35ft x 35ft Pond)`;
+      } else if (totalPondCapacity < 250000) {
+        pondDesc = `${(totalPondCapacity / 100000).toFixed(1)} Lakh L (approx. 45ft x 45ft Pond)`;
+      } else {
+        pondDesc = `${(totalPondCapacity / 100000).toFixed(1)} Lakh L (approx. 55ft x 55ft Pond)`;
+      }
+
+      // Cost & Subsidy Estimation
+      const farmerCat = document.getElementById('farmerCategory').value;
+      const subsidyPct = farmerCat === 'small' ? 0.70 : 0.50; // 70% vs 50%
+      const costPerAcre = cropVal === 'field' ? 20000 : (cropVal === 'cash' ? 32000 : 45000);
+      
+      const totalCost = Math.round(costPerAcre * acres);
+      const subsidyAmount = Math.round(totalCost * subsidyPct);
+      const farmerShare = totalCost - subsidyAmount;
+
+      // Update the DOM elements
+      document.getElementById('resSysType').textContent = d.system;
+      document.getElementById('resPipe').textContent = pipeDesc;
+      document.getElementById('resSaved').textContent = savedText;
+      document.getElementById('resPond').textContent = pondDesc;
+
+      document.getElementById('resSysType2').textContent = d.system;
+      document.getElementById('resPipe2').textContent = d.pipeSize;
+      document.getElementById('resSaved2').textContent = savedText;
+      document.getElementById('resPond2').textContent = pondDesc;
+      document.getElementById('resEmittersCount').textContent = emitterDesc;
+      document.getElementById('resZone').textContent = d.notes;
+
+      document.getElementById('resTotalCost').textContent = `₹${totalCost.toLocaleString('en-IN')}`;
+      document.getElementById('resSubsidy').textContent = `-₹${subsidyAmount.toLocaleString('en-IN')} (${subsidyPct * 100}%)`;
+      document.getElementById('resFarmerCost').textContent = `₹${farmerShare.toLocaleString('en-IN')}`;
+    }
+
+    // Share Details on WhatsApp
+    function shareToWhatsApp() {
+      const crop = document.getElementById('cropType').value;
+      const size = parseFloat(document.getElementById('acreNum').value) || 1;
+      const unit = currentUnit;
+      const waterSource = document.getElementById('waterSource').value;
+      const farmerCat = document.getElementById('farmerCategory').value;
+      
+      const cropNames = {
+        vegetables: "Vegetables / सब्जियां (मिर्च, टमाटर)",
+        horticulture: "Orchards / बागवानी (नींबू, अनार)",
+        field: "Field Crops / अनाज (गेहूँ, बाजरा, सरसों)",
+        cash: "Cash Crops / नकदी (मूँगफली, कपास)"
+      };
+      
+      const cropName = cropNames[crop] || crop;
+      const unitText = unit === 'bigha' ? 'बीघा (Bigha)' : 'एकड़ (Acre)';
+      const farmerCatText = farmerCat === 'small' ? 'लघु-सीमांत-महिला (70% Subsidy)' : 'अन्य-सामान्य (50% Subsidy)';
+      const farmerCostText = document.getElementById('resFarmerCost').textContent;
+      
+      const text = `Namaste Dharam Chand ji! Maine website par Water Planner use kiya hai.
+Meri farm details niche hain:
+- Land Size: ${size} ${unitText}
+- Crop Type: ${cropName}
+- Water Source: ${waterSource}
+- Farmer Category: ${farmerCatText}
+- Estimated Farmer Share: ${farmerCostText} (Govt. Subsidy factored)
+
+Website recommendations ke hisab se mujhe details bhejein. Main aapse system installation aur pricing ke baare mein charcha karna chahta hoon. Dhanyawad!`;
+
+      const encodedText = encodeURIComponent(text);
+      const url = `https://wa.me/919414592783?text=${encodedText}`;
+      window.open(url, '_blank');
+    }
+
+    // Override initPlanner
+    window.initPlanner = function() {
+      updatePlanner();
+    }
   </script>
   <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/919414592783?text=Namaste!%20Main%20Mithari%20Agro%20Agency%20ke%20products%20ke%20baare%20mein%20jaankari%20lena%20chahta%20hoon.%20Please%20help%20me." target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
-    <span class="wa-tip">?? Chat on WhatsApp</span>
+    <span class="wa-tip">💬 Chat on WhatsApp</span>
   </a>
 </body>
 </html>

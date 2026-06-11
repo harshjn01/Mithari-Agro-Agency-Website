@@ -209,9 +209,31 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const successId = form.dataset.success;
       const successEl = document.getElementById(successId);
-      // Gather and log data
-      const data = Object.fromEntries(new FormData(form).entries());
-      console.log('[Mithari Agro] Form Submit:', data);
+      
+      const formData = new FormData(form);
+      const action = form.getAttribute('action');
+      
+      // Perform AJAX submission if action is set
+      if (action) {
+        fetch(action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        })
+        .then(response => {
+          console.log('[Mithari Agro] Form submitted via AJAX:', response);
+        })
+        .catch(err => {
+          console.error('[Mithari Agro] AJAX submission failed:', err);
+        });
+      }
+      
+      // Gather and log data locally
+      const data = Object.fromEntries(formData.entries());
+      console.log('[Mithari Agro] Local Form Submit:', data);
+      
       if (successEl) {
         form.classList.add('hidden');
         successEl.classList.remove('hidden');
@@ -239,11 +261,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ---- PAGE-SPECIFIC: Planner Calculator ---- */
 function initPlanner() {
+  // If the page overrides initPlanner (like planner.html), do not run the default basic version
+  if (window.initPlanner && window.initPlanner !== initPlanner) return;
+
   const acre  = document.getElementById('acreRange');
   const acreV = document.getElementById('acreVal');
   const crop  = document.getElementById('cropType');
 
-  if (!acre || !crop) return;
+  if (!acre || !crop || !acreV) return;
 
   const update = () => {
     const a = +acre.value;
