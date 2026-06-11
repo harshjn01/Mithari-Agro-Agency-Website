@@ -573,20 +573,38 @@
     // Category filter
     const catBtns = document.querySelectorAll('.cat-btn');
     const prodCards = document.querySelectorAll('.prod-card');
+    
+    function applyFilter(filter) {
+      catBtns.forEach(btn => {
+        if (btn.dataset.filter === filter) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      prodCards.forEach(card => {
+        if (filter === 'all' || card.dataset.cat === filter) {
+          card.style.display = 'flex';
+          card.style.animation = 'fadeIn 0.4s ease';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
     catBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        catBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        prodCards.forEach(card => {
-          if (filter === 'all' || card.dataset.cat === filter) {
-            card.style.display = 'flex';
-            card.style.animation = 'fadeIn 0.4s ease';
-          } else {
-            card.style.display = 'none';
-          }
-        });
+        applyFilter(btn.dataset.filter);
       });
+    });
+
+    // Auto-filter based on URL query parameter or hash
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const filterParam = urlParams.get('filter') || window.location.hash.substring(1);
+      if (filterParam) {
+        applyFilter(filterParam);
+      }
     });
   </script>
 </body>
