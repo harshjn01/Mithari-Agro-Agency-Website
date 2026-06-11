@@ -254,32 +254,32 @@
       <div class="planner-wrap">
         <!-- INPUT CARD -->
         <div class="planner-card reveal">
-          <h2>Your Farm Details / फार्म का विवरण</h2>
-          <div class="sub">Select your crop type and land size to get recommendations in simple terms. / ड्रिप और फव्वारा सिस्टम के लिए अपनी जानकारी भरें।</div>
+          <h2>Your Farm Details</h2>
+          <div class="sub">Select your crop type and land size to get recommendations in simple terms.</div>
 
           <!-- Step 1: Crop Type -->
           <div class="form-group mb-6">
-            <label class="form-label" style="font-weight:700;">Step 1: Select Crop / फसल चुनें</label>
+            <label class="form-label" style="font-weight:700;">Step 1: Select Crop</label>
             <div class="crop-grid">
               <button class="crop-btn selected" data-crop="vegetables" onclick="selectCrop(this)">
                 <span class="emoji">🌶️</span>
-                <span style="font-size:0.9rem; margin-top:2px;">Vegetables / सब्जियां</span>
-                <span style="font-size:0.7rem; color:var(--text-3); font-weight:normal;">(मिर्च, टमाटर, प्याज)</span>
+                <span style="font-size:0.9rem; margin-top:2px;">Vegetables</span>
+                <span style="font-size:0.7rem; color:var(--text-3); font-weight:normal;">(Chilli, Tomato, Onion)</span>
               </button>
               <button class="crop-btn" data-crop="horticulture" onclick="selectCrop(this)">
                 <span class="emoji">🍊</span>
-                <span style="font-size:0.9rem; margin-top:2px;">Orchards / बागवानी</span>
-                <span style="font-size:0.7rem; color:var(--text-3); font-weight:normal;">(नींबू, अनार, बेर)</span>
+                <span style="font-size:0.9rem; margin-top:2px;">Orchards</span>
+                <span style="font-size:0.7rem; color:var(--text-3); font-weight:normal;">(Lemon, Pomegranate, Ber)</span>
               </button>
               <button class="crop-btn" data-crop="field" onclick="selectCrop(this)">
                 <span class="emoji">🌾</span>
-                <span style="font-size:0.9rem; margin-top:2px;">Field Crops / अनाज</span>
-                <span style="font-size:0.7rem; color:var(--text-3); font-weight:normal;">(गेहूँ, बाजरा, सरसों)</span>
+                <span style="font-size:0.9rem; margin-top:2px;">Field Crops</span>
+                <span style="font-size:0.7rem; color:var(--text-3); font-weight:normal;">(Wheat, Bajra, Mustard)</span>
               </button>
               <button class="crop-btn" data-crop="cash" onclick="selectCrop(this)">
                 <span class="emoji">🌻</span>
-                <span style="font-size:0.9rem; margin-top:2px;">Cash Crops / नकदी</span>
-                <span style="font-size:0.7rem; color:var(--text-3); font-weight:normal;">(मूँगफली, कपास, ग्वार)</span>
+                <span style="font-size:0.9rem; margin-top:2px;">Cash Crops</span>
+                <span style="font-size:0.7rem; color:var(--text-3); font-weight:normal;">(Groundnut, Cotton, Guar)</span>
               </button>
             </div>
             <!-- Hidden select for JS -->
@@ -293,12 +293,12 @@
 
           <!-- Step 2: Land Size (Acres / Bighas) -->
           <div class="form-group mb-6">
-            <label class="form-label" style="font-weight:700; margin-bottom: 8px; display:block;">Step 2: Choose Unit & Size / पैमाना और आकार</label>
+            <label class="form-label" style="font-weight:700; margin-bottom: 8px; display:block;">Step 2: Choose Unit & Size</label>
             
             <!-- Unit Toggle Container -->
             <div class="unit-toggle-container">
-              <button type="button" class="unit-btn active" id="unitAcre" onclick="setUnit('acre')">Acre (एकड़)</button>
-              <button type="button" class="unit-btn" id="unitBigha" onclick="setUnit('bigha')">Bigha (बीघा)</button>
+              <button type="button" class="unit-btn active" id="unitAcre" onclick="setUnit('acre')">Acre</button>
+              <button type="button" class="unit-btn" id="unitBigha" onclick="setUnit('bigha')">Bigha</button>
             </div>
 
             <div class="slider-label">
@@ -325,44 +325,44 @@
 
           <!-- Step 3: Water Source -->
           <div class="form-group mb-6">
-            <label class="form-label" style="font-weight:700;">Step 3: Water Source / पानी का साधन</label>
+            <label class="form-label" style="font-weight:700;">Step 3: Water Source</label>
             <select id="waterSource" class="form-input" onchange="updatePlanner()">
-              <option value="Borewell / नलकूप (कुआँ)">Borewell / नलकूप (कुआँ)</option>
-              <option value="Canal / नहर (खाल)">Canal / नहर (खाल)</option>
-              <option value="Khet Talai / खेत तलाई (Pond)">Khet Talai / खेत तलाई (Pond)</option>
-              <option value="Municipal / Tanker Supply (टैंकर)">Municipal / Tanker Supply (टैंकर)</option>
-              <option value="Open Well / खुला कुआँ">Open Well / खुला कुआँ</option>
+              <option value="Borewell">Borewell</option>
+              <option value="Canal">Canal</option>
+              <option value="Khet Talai (Farm Pond)">Khet Talai (Farm Pond)</option>
+              <option value="Municipal / Tanker Supply">Municipal / Tanker Supply</option>
+              <option value="Open Well">Open Well</option>
             </select>
           </div>
 
           <!-- Step 4: Farmer Category (for Subsidy Estimator) -->
           <div class="form-group mb-6">
-            <label class="form-label" style="font-weight:700;">Step 4: Farmer Category / किसान श्रेणी (सब्सिडी हेतु)</label>
+            <label class="form-label" style="font-weight:700;">Step 4: Farmer Category (for Subsidy)</label>
             <select id="farmerCategory" class="form-input" onchange="updatePlanner()">
-              <option value="small">Small, Marginal or Woman Farmer / लघु, सीमांत या महिला किसान (70% Subsidy)</option>
-              <option value="general">Other / सामान्य या अन्य किसान (50% Subsidy)</option>
+              <option value="small">Small, Marginal or Woman Farmer (70% Subsidy)</option>
+              <option value="general">Other / General Farmer (50% Subsidy)</option>
             </select>
           </div>
 
           <!-- CTA -->
           <div class="highlight-box" style="font-size:0.83rem; line-height:1.5; color:var(--text-2);">
-            <strong>💡 राजस्थान खेत गाइड:</strong> यह अनुमान राजस्थान के रेतीले और शुष्क क्षेत्र की परिस्थितियों पर आधारित है। अपनी भूमि की सटीक जरूरत जानने के लिए संपर्क करें।
+            <strong>💡 Rajasthan Farm Guide:</strong> This estimate is based on the dry soil conditions of Rajasthan. Contact us for your specific farm needs.
           </div>
           <a href="contact.html" class="btn btn-outline btn-full btn-lg mt-4">
-            ✉️ Get Custom Design Quote (फ्री डिज़ाइन और कोट)
+            ✉️ Get Custom Design Quote (Free of Cost)
           </a>
         </div>
 
         <!-- RESULTS CARD -->
         <div class="reveal d2">
           <div class="results-card">
-            <h2>📊 Recommendations / सुझाई गई सलाह</h2>
-            <div class="sub">Tailored for Rajasthan Dry Regions · वास्तविक समय गणना</div>
+            <h2>📊 Recommendations</h2>
+            <div class="sub">Tailored for Rajasthan Dry Regions · Real-time calculations</div>
 
             <div class="result-tiles">
               <div class="r-tile">
                 <div class="r-tile-icon">💧</div>
-                <div class="r-tile-label">Annual Water Saved (बचत)</div>
+                <div class="r-tile-label">Annual Water Saved</div>
                 <div class="r-tile-val" id="resSaved">15 Lakh Liters</div>
               </div>
               <div class="r-tile">
@@ -372,58 +372,58 @@
               </div>
               <div class="r-tile">
                 <div class="r-tile-icon">🔧</div>
-                <div class="r-tile-label">HDPE Pipes (अनुमानित)</div>
+                <div class="r-tile-label">HDPE Pipes</div>
                 <div class="r-tile-val" id="resPipe">125 Pipes</div>
               </div>
               <div class="r-tile">
                 <div class="r-tile-icon">🏞️</div>
-                <div class="r-tile-label">Pond Capacity (खेत तलाई)</div>
+                <div class="r-tile-label">Pond Capacity</div>
                 <div class="r-tile-val" id="resPond">1,25,000 L</div>
               </div>
             </div>
 
             <div class="result-detail">
               <div class="r-detail-row">
-                <span class="r-key">Recommended System / सुझाई गई प्रणाली</span>
+                <span class="r-key">Recommended System</span>
                 <span class="r-val" id="resSysType2">Inline Drip</span>
               </div>
               <div class="r-detail-row">
-                <span class="r-key">Mainline Pipe Size / मुख्य पाइप व्यास</span>
+                <span class="r-key">Mainline Pipe Size</span>
                 <span class="r-val" id="resPipe2">75mm PN6 HDPE</span>
               </div>
               <div class="r-detail-row">
-                <span class="r-key">Drippers/Nozzles Needed / जरूरी ड्रिपर/नोजल</span>
+                <span class="r-key">Drippers/Nozzles Needed</span>
                 <span class="r-val" id="resEmittersCount">approx. 2,200 emitters</span>
               </div>
               <div class="r-detail-row">
-                <span class="r-key">Pond Lining Required / तलाई तिरपाल कैपेसिटी</span>
+                <span class="r-key">Pond Lining Required</span>
                 <span class="r-val" id="resPond2">1,25,000 Liters</span>
               </div>
               <div class="r-detail-row">
-                <span class="r-key">Estimated Savings / सालाना पानी की बचत</span>
+                <span class="r-key">Estimated Savings</span>
                 <span class="r-val" id="resSaved2">15 Lakh Liters</span>
               </div>
               <div class="r-detail-row">
-                <span class="r-key">Suitable Crops / उपयोगी फसलें</span>
+                <span class="r-key">Suitable Crops</span>
                 <span class="r-val" id="resZone">Vegetables</span>
               </div>
               <div class="r-detail-row" style="border-top:1.5px dashed var(--border); padding-top:12px; margin-top:12px;">
-                <span class="r-key" style="font-weight:700;">Est. Total System Cost / अनुमानित कुल लागत</span>
+                <span class="r-key" style="font-weight:700;">Est. Total System Cost</span>
                 <span class="r-val" id="resTotalCost" style="font-weight:700;">₹2,25,000</span>
               </div>
               <div class="r-detail-row" style="background:var(--green-pale); padding:6px 10px; border-radius:var(--r-sm); border-left:3px solid var(--green);">
-                <span class="r-key" style="color:var(--green); font-weight:700;">Estimated Govt. Subsidy / सरकारी अनुदान (अनुमानित)</span>
+                <span class="r-key" style="color:var(--green); font-weight:700;">Estimated Govt. Subsidy</span>
                 <span class="r-val" id="resSubsidy" style="color:var(--green); font-weight:700;">-₹1,57,500 (70%)</span>
               </div>
               <div class="r-detail-row">
-                <span class="r-key" style="font-weight:700; color:var(--text-1);">Farmer Share / आपका अनुमानित शुद्ध खर्च</span>
+                <span class="r-key" style="font-weight:700; color:var(--text-1);">Farmer Share</span>
                 <span class="r-val" id="resFarmerCost" style="font-weight:700; color:var(--text-1); font-size:1.1rem;">₹67,500</span>
               </div>
             </div>
 
             <button onclick="shareToWhatsApp()" class="btn btn-wa-share btn-lg">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display:inline-block; vertical-align:middle; margin-right:6px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              Share on WhatsApp / व्हाट्सएप पर भेजें
+              Share on WhatsApp
             </button>
           </div>
         </div>
@@ -500,20 +500,20 @@
     <div class="wrap">
       <div class="grid col-2 gap-lg">
         <div class="reveal">
-          <div class="section-tag">Rajasthan Govt. Subsidy / कृषि अनुदान</div>
-          <h2 class="section-title">Get Up To <span class="hl">70-75% Govt. Subsidy</span> / सरकारी योजनाएं</h2>
+          <div class="section-tag">Rajasthan Govt. Subsidy</div>
+          <h2 class="section-title">Get Up To <span class="hl">70-75% Govt. Subsidy</span></h2>
           <p class="section-desc">The Rajasthan Department of Agriculture provides financial support for drip irrigation, sprinklers, and farm ponds (Khet Talai) to promote water conservation. Mithari Agro Agency is an authorized partner helping you clear all documentation easily.</p>
           
           <div style="background:var(--bg-3); border:1.5px solid var(--border); border-radius:var(--r-xl); padding:24px; margin-top:24px;">
             <h4 style="font-family:var(--font-head); font-weight:700; margin-bottom:12px; color:var(--text-1); display:flex; align-items:center; gap:8px;">
-              📋 Documents Needed / आवश्यक दस्तावेज:
+              📋 Documents Needed:
             </h4>
             <ul style="font-size:0.88rem; line-height:1.7; color:var(--text-2); padding-left:20px; display:flex; flex-direction:column; gap:8px;">
-              <li><strong>Jamabandi Copy (नकल जमाबंदी):</strong> Land ownership record (not older than 6 months). / 6 महीने से अधिक पुरानी न हो।</li>
-              <li><strong>Naksha Trace (नक्शा ट्रेस):</strong> Land map certified by Patwari. / हल्का पटवारी द्वारा प्रमाणित नक्शा।</li>
-              <li><strong>Jan Aadhaar / Aadhaar (जन आधार / आधार):</strong> Linked with active mobile number for OTP. / जन आधार कार्ड व आधार कार्ड।</li>
-              <li><strong>Soil & Water Report (मिट्टी-पानी जांच):</strong> Certified lab testing report. / प्राधिकृत प्रयोगशाला की रिपोर्ट।</li>
-              <li><strong>Electricity Bill / Certificate (बिजली का बिल):</strong> Pump details or well registry. / कुएं या विद्युत कनेक्शन विवरण।</li>
+              <li><strong>Jamabandi Copy:</strong> Land ownership record (not older than 6 months).</li>
+              <li><strong>Naksha Trace:</strong> Land map certified by Patwari.</li>
+              <li><strong>Jan Aadhaar / Aadhaar:</strong> Linked with active mobile number for OTP.</li>
+              <li><strong>Soil & Water Report:</strong> Certified lab testing report.</li>
+              <li><strong>Electricity Bill / Certificate:</strong> Pump details or well registry.</li>
             </ul>
           </div>
         </div>
@@ -522,37 +522,37 @@
           <div style="background:#fff; border:1.5px solid var(--border); border-radius:var(--r-xl); padding:32px; height:100%; display:flex; flex-direction:column; gap:20px; justify-content:center; box-shadow:var(--shadow-sm);">
             <div style="text-align:center; margin-bottom:10px;">
               <span style="font-size:3rem;">🌾</span>
-              <h3 style="font-family:var(--font-head); font-size:1.3rem; font-weight:800; margin-top:10px;">Who is Eligible? / पात्रता की शर्तें</h3>
+              <h3 style="font-family:var(--font-head); font-size:1.3rem; font-weight:800; margin-top:10px;">Who is Eligible?</h3>
             </div>
             
             <div style="display:grid; gap:16px;">
               <div style="display:flex; gap:12px; align-items:flex-start;">
                 <div style="background:var(--green-pale); color:var(--green); width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">1</div>
                 <div>
-                  <h5 style="font-weight:700; font-size:0.92rem; margin-bottom:2px;">Minimum Land / न्यूनतम भूमि</h5>
-                  <p style="font-size:0.83rem; color:var(--text-2); line-height:1.4;">At least 0.2 hectares of irrigated land is required for subsidy application. / आवेदन के लिए कम से कम 0.2 हेक्टेयर भूमि अनिवार्य।</p>
+                  <h5 style="font-weight:700; font-size:0.92rem; margin-bottom:2px;">Minimum Land</h5>
+                  <p style="font-size:0.83rem; color:var(--text-2); line-height:1.4;">At least 0.2 hectares of irrigated land is required for subsidy application.</p>
                 </div>
               </div>
 
               <div style="display:flex; gap:12px; align-items:flex-start;">
                 <div style="background:var(--green-pale); color:var(--green); width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">2</div>
                 <div>
-                  <h5 style="font-weight:700; font-size:0.92rem; margin-bottom:2px;">Small/Marginal/Women / विशेष प्राथमिकता</h5>
-                  <p style="font-size:0.83rem; color:var(--text-2); line-height:1.4;">Small, marginal, and women farmers receive higher subsidy rates (70% to 75%). / लघु, सीमांत व महिला किसानों को विशेष वरीयता।</p>
+                  <h5 style="font-weight:700; font-size:0.92rem; margin-bottom:2px;">Small/Marginal/Women Priority</h5>
+                  <p style="font-size:0.83rem; color:var(--text-2); line-height:1.4;">Small, marginal, and women farmers receive higher subsidy rates (70% to 75%).</p>
                 </div>
               </div>
 
               <div style="display:flex; gap:12px; align-items:flex-start;">
                 <div style="background:var(--green-pale); color:var(--green); width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">3</div>
                 <div>
-                  <h5 style="font-weight:700; font-size:0.92rem; margin-bottom:2px;">Khet Talai (Farm Pond) / खेत तलाई योजना</h5>
-                  <p style="font-size:0.83rem; color:var(--text-2); line-height:1.4;">Subsidies for lined ponds up to Rs. 90,000 to prevent seepage of rainwater. / प्लास्टिक शीट तलाई पर अधिकतम ₹90,000 तक सब्सिडी।</p>
+                  <h5 style="font-weight:700; font-size:0.92rem; margin-bottom:2px;">Khet Talai (Farm Pond)</h5>
+                  <p style="font-size:0.83rem; color:var(--text-2); line-height:1.4;">Subsidies for lined ponds up to Rs. 90,000 to prevent seepage of rainwater.</p>
                 </div>
               </div>
             </div>
 
-            <a href="https://wa.me/919414592783?text=Namaste!%20Mujhe%20Rajasthan%20Government%20Subsidy%20(कृषि%20अनुदान)%20yojana%20aur%20drip%20irrigation%20par%20jaankari%20chahiye." target="_blank" class="btn btn-green btn-full" style="margin-top:10px;">
-              💬 Ask About Subsidy on WhatsApp / योजना की जानकारी लें
+            <a href="https://wa.me/919414592783?text=Namaste!%20I%20would%20like%20to%20know%20more%20about%20the%20Rajasthan%20government%20irrigation%20subsidies." target="_blank" class="btn btn-green btn-full" style="margin-top:10px;">
+              💬 Ask About Subsidy on WhatsApp
             </a>
           </div>
         </div>
@@ -645,7 +645,7 @@
       const prevVal = parseFloat(numInput.value) || 5;
       
       if (unit === 'bigha') {
-        unitLabel.textContent = 'बीघा';
+        unitLabel.textContent = 'Bighas';
         slider.min = 1;
         slider.max = 120;
         // Convert Acre to Bigha (1 Acre = 2.5 Bigha)
@@ -653,7 +653,7 @@
         slider.value = newVal;
         numInput.value = newVal;
         
-        ticks.innerHTML = '<span>1 बीघा</span><span>60 बीघा</span><span>120 बीघा</span>';
+        ticks.innerHTML = '<span>1 Bigha</span><span>60 Bighas</span><span>120 Bighas</span>';
       } else {
         unitLabel.textContent = 'Acres';
         slider.min = 1;
@@ -718,7 +718,7 @@
       // Calculations database based on standard local Rajasthan configurations
       const data = {
         vegetables: {
-          system: 'Inline Drip System (सब्जी ड्रिप)',
+          system: 'Inline Drip System',
           pipeSize: '75mm PN6 HDPE Pipes',
           pipeRatio: 25, // 25 pipes of 6m per acre
           emitterRatio: 2200, // 2200 drippers per acre
@@ -727,7 +727,7 @@
           notes: 'Chilli, Tomato, Onion, etc.'
         },
         horticulture: {
-          system: 'Online Drip System (बागवानी ड्रिप)',
+          system: 'Online Drip System',
           pipeSize: '63mm PN6 HDPE Pipes',
           pipeRatio: 20,
           emitterRatio: 400, // 400 emitters per acre (100 trees)
@@ -736,7 +736,7 @@
           notes: 'Pomegranate, Lemon, Ber, Citrus'
         },
         field: {
-          system: 'Sprinkler System (फव्वारा सिंचाई)',
+          system: 'Sprinkler System',
           pipeSize: '90mm PN4 HDPE Pipes',
           pipeRatio: 30, // 30 quick-coupling pipes per acre
           emitterRatio: 8, // 8 nozzles per acre
@@ -745,7 +745,7 @@
           notes: 'Wheat, Mustard, Bajra, etc.'
         },
         cash: {
-          system: 'Rain Pipe / Micro Drip (रेन पाइप)',
+          system: 'Rain Pipe / Micro Drip',
           pipeSize: '75mm PN6 HDPE Pipes',
           pipeRatio: 25,
           emitterRatio: 1200,
@@ -765,7 +765,7 @@
 
       // Sizing descriptions for pipes and emitters
       const pipeDesc = `approx. ${totalPipes} pipes (${d.pipeSize}, 20ft length)`;
-      let emitterUnit = cropVal === 'field' ? 'nozzles (नोजल)' : 'emitters (ड्रिपर)';
+      let emitterUnit = cropVal === 'field' ? 'nozzles' : 'emitters';
       const emitterDesc = `approx. ${totalEmitters.toLocaleString()} ${emitterUnit}`;
 
       // Water saved formatted in Lakh Liters (traditional Indian system)
@@ -824,26 +824,26 @@
       const farmerCat = document.getElementById('farmerCategory').value;
       
       const cropNames = {
-        vegetables: "Vegetables / सब्जियां (मिर्च, टमाटर)",
-        horticulture: "Orchards / बागवानी (नींबू, अनार)",
-        field: "Field Crops / अनाज (गेहूँ, बाजरा, सरसों)",
-        cash: "Cash Crops / नकदी (मूँगफली, कपास)"
+        vegetables: "Vegetables (Chilli, Tomato, Onion)",
+        horticulture: "Orchards (Lemon, Pomegranate, Ber)",
+        field: "Field Crops (Wheat, Bajra, Mustard)",
+        cash: "Cash Crops (Groundnut, Cotton, Guar)"
       };
       
       const cropName = cropNames[crop] || crop;
-      const unitText = unit === 'bigha' ? 'बीघा (Bigha)' : 'एकड़ (Acre)';
-      const farmerCatText = farmerCat === 'small' ? 'लघु-सीमांत-महिला (70% Subsidy)' : 'अन्य-सामान्य (50% Subsidy)';
+      const unitText = unit === 'bigha' ? 'Bigha' : 'Acre';
+      const farmerCatText = farmerCat === 'small' ? 'Small/Marginal/Women (70% Subsidy)' : 'General/Other (50% Subsidy)';
       const farmerCostText = document.getElementById('resFarmerCost').textContent;
       
-      const text = `Namaste Dharam Chand ji! Maine website par Water Planner use kiya hai.
-Meri farm details niche hain:
+      const text = `Namaste Dharam Chand ji! I have used the Water Planner tool on your website.
+My farm details:
 - Land Size: ${size} ${unitText}
 - Crop Type: ${cropName}
 - Water Source: ${waterSource}
 - Farmer Category: ${farmerCatText}
 - Estimated Farmer Share: ${farmerCostText} (Govt. Subsidy factored)
 
-Website recommendations ke hisab se mujhe details bhejein. Main aapse system installation aur pricing ke baare mein charcha karna chahta hoon. Dhanyawad!`;
+Please send me details based on these recommendations. I would like to discuss pricing and installation. Thank you!`;
 
       const encodedText = encodeURIComponent(text);
       const url = `https://wa.me/919414592783?text=${encodedText}`;
